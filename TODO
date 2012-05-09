@@ -1,0 +1,28 @@
+MODÈLE
+- finir le UML
+
+CLASSES DE BASE
+- classe ElementPile
+- classe Pile
+- une pile temporaire pour les calculs
+- une pile sur laquelle on empile le résultat
+- Calculatrice : créer une nouvelle pile à partir d'une chaîne de caractères 
+- Calculatrice : évaluer le contenu de la pile temporaire
+- Calculatrice : toutes les opérations
+
+INTERFACE
+- classe Clavier
+  - tous les widgets boutons
+  - capture les raccourcis clavier
+- classe Afficheur
+  - affiche les saisies au clavier
+  - reçoit des événements du clavier
+  - envoie des événements à la calculatrice
+- classe AfficheurPile
+- paramètres
+- sauvegarde état
+- annuler/rétablir
+- onglets
+
+DOXYGEN
+- Générer la doc
