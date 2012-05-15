@@ -1,0 +1,51 @@
+Compte rendu de TP 04 du 15/05/12
+
+Les piles
+
+Il faut travailler sur 2 piles : 
+•	Une pile d'affichage (copie de l'écran, pile de string)
+•	Une pile de stockage, dans laquelle on ne stocke pas d'expression (pile de nombres).
+ 
+Il ne faut pas créer de classe pile, mais utiliser la classe QStack.
+Les types de données
+On distingue les différents modes Entier, Réelle et rationnelle uniquement sur l'affichage du résultat de la division.
+On ne stocke dans la pile de stockage que des réelles. 
+L'utilisateur ne peut pas sélectionner deux modes en même temps. 
+
+
+
+La saisie
+
+On ne peut rentrer une opération sur une même ligne ssi c'est une expression et qu'elle est entre guillemets. 
+Exemples : 
+1
+2
++
+=> 1+2
+'
+1
+2
++
+'
+=> '1 + 2'
+'1 2 +'
+=> '1+2' expression qu'on exécute et qu'on met dans la pile
+
+Ces contraintes concernent surtout la pile affichage. La méthode de calcul que j’ai codé ignore simplement les cotes. Si tu lui donne ‘1 2 ‘’’ 4 +’’ elle comprendra 1 2 4 +
+
+
+
+
+Les erreurs de frappes
+
+L'utilisateur ne peut utiliser que les boutons de la calculatrice.
+Il faut cocher une option sur chaque bouton pour que l'utilisateur puisse utiliser la touche de son clavier équivalente, ce qui empêche les erreurs de frappe. 
+
+
+
+
+Le mode complexe
+
+Tant que l’utilisateur n'est pas en mode complexe, il n'a pas le droit d'entrer des complexes. 
+S'il rentre un complexe en dehors du mode complexe, il faut bloquer la calculatrice et l'obliger à quitter ou l’empêcher de rentrer des complexes. 
+Si le mode complexe est activé, tous les nombres sont complexes. 1 => 1 + 0i
