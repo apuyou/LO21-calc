@@ -1,19 +1,30 @@
-MODÈLE
+﻿MODÈLE
 - finir le UML
 
 CLASSES DE BASE
-- classe ElementPile
-- classe Pile
-- une pile temporaire pour les calculs
-- une pile sur laquelle on empile le résultat
-- Calculatrice : créer une nouvelle pile à partir d'une chaîne de caractères 
-- Calculatrice : évaluer le contenu de la pile temporaire
-- Calculatrice : toutes les opérations
+X classe ElementPile XXXXX
+X classe Pile XXXXX
+- une pile pour les affichages
+V une pile sur laquelle on empile le résultat (de stockage)
+V Calculatrice : créer une nouvelle pile à partir d'une chaîne de caractères 
+X Calculatrice : évaluer le contenu de la pile temporaire
+V Calculateur : effectuer les opérations de base (+, -, *, /)
+- Calculateur : Gestion des erreurs
+- Calculateur : effectuer les opérations sur la pile (à relier directement aux boutons)
+- Calculateur : Effectuer les fonctions POW, MOD et SIGN
+- Calculateur : Effectuer les opérateurs unaires
+- Calculateur : Mettre au points les différents modes (Entier, Réelle, Fraction)
+- Calculateur : Mettre au point le mode Complexe
+- Calculateur : Adapter les opérateurs unaires aux complexes
+- Calculateur : Sauvegarde du contexte
+- Calculateur : Fonctions annuler et rétablir
+- Calculateur : Mettre en place les onglets
 
 INTERFACE
 - classe Clavier
   - tous les widgets boutons
-  - capture les raccourcis clavier
+  - Associer les boutons aux touches claviers
+  - capture les raccourcis clavier (Ctrl -C, -Z, -Y, ...)
 - classe Afficheur
   - affiche les saisies au clavier
   - reçoit des événements du clavier
