@@ -15,8 +15,9 @@ public:
     ~Erreur()throw(){}
 };
 
-void f(){
+//TRUC INUTILE
+/*void f(){
     throw Erreur("declenchement d'une exception");
-}
+}*/
 
 #endif // EXCEPTION_H
