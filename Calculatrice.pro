@@ -19,4 +19,5 @@ SOURCES += main.cpp \
     Calculateur.cpp
 
 HEADERS += \
-    Calculateur.h
+    Calculateur.h \
+    Exception.h
