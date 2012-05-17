@@ -9,8 +9,8 @@ V une pile sur laquelle on empile le résultat (de stockage)
 V Calculatrice : créer une nouvelle pile à partir d'une chaîne de caractères 
 X Calculatrice : évaluer le contenu de la pile temporaire
 V Calculateur : effectuer les opérations de base (+, -, *, /)
-- Calculateur : Gestion des erreurs
-- Calculateur : effectuer les opérations sur la pile (à relier directement aux boutons)
+V Calculateur : Gestion des erreurs
+V Calculateur : effectuer les opérations sur la pile (à relier directement aux boutons)
 - Calculateur : Effectuer les fonctions POW, MOD et SIGN
 - Calculateur : Effectuer les opérateurs unaires
 - Calculateur : Mettre au points les différents modes (Entier, Réelle, Fraction)
