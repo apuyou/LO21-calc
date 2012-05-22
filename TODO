@@ -11,10 +11,12 @@ X Calculatrice : évaluer le contenu de la pile temporaire
 V Calculateur : effectuer les opérations de base (+, -, *, /)
 V Calculateur : Gestion des erreurs
 V Calculateur : effectuer les opérations sur la pile (à relier directement aux boutons)
-- Calculateur : Effectuer les fonctions POW, MOD et SIGN
-- Calculateur : Effectuer les opérateurs unaires
-- Calculateur : Mettre au points les différents modes (Entier, Réelle, Fraction)
+V Calculateur : Effectuer les fonctions POW, MOD et SIGN
+V Calculateur : Effectuer les opérateurs unaires
+V Calculateur : Mettre au points les différents modes (Entier, Réelle, Fraction)
+		Comment convertir les float en fraction ? Implémenter des méthodes spéciales
 - Calculateur : Mettre au point le mode Complexe
+		Peut-on créer une pile de parties imaginaires ? OUI
 - Calculateur : Adapter les opérateurs unaires aux complexes
 - Calculateur : Sauvegarde du contexte
 - Calculateur : Fonctions annuler et rétablir
