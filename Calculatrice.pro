@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core
-
-QT       -= gui
+QT       += core gui
 
 TARGET = Calculatrice
 CONFIG   += console
@@ -16,8 +14,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    Calculateur.cpp
+    Calculateur.cpp \
+    afficheur.cpp
 
 HEADERS += \
     Calculateur.h \
-    Exception.h
+    Exception.h \
+    afficheur.h
+
+FORMS += \
+    afficheur.ui
