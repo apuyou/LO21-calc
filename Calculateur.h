@@ -18,6 +18,8 @@
 #include <string>
 #include <cstdlib>
 #include <algorithm> //Fonctions min et max
+#define _USE_MATH_DEFINES //Permet d'utiliser pi : M_PI
+#include <cmath>
 
 /**
  * \enum Mode
@@ -32,12 +34,44 @@ enum Mode {Entier, Reel, Fraction, Complexe};
 class Calculateur{
 private:
     QStack<float> pile_m; /*!< Pile de réelles permettant de stocker les résultats des opérations */
+    bool radiant_m; /*!< Booléen égal à TRUE si le mode radian et activé et FALSE si le mode degré est activé */
+    Mode typeConstante_m; /*!< Variable de type Mode (énumération) permettant de définir le mode de constante */
 public:
     /**
      * \fn Calculateur()
      * \brief Fonction : Créer une nouvelle instance de l'objet Calculateur
      */
     Calculateur();
+    /**
+     * \fn modeDegre()
+     * \brief Fonction : Bascule le calculateur en mode degré
+     */
+    void modeDegre(){radiant_m = false;}
+    /**
+     * \fn modeRadiant()
+     * \brief Fonction : Bascule le calculateur en mode radiant
+     */
+    void modeRadiant(){radiant_m = true;}
+    /**
+     * \fn modeEntier()
+     * \brief Fonction : Bascule le calculateur en mode entier
+     */
+    void modeEntier();
+    /**
+     * \fn modeReel()
+     * \brief Fonction : Bascule le calculateur en mode réel
+     */
+    void modeReel(){typeConstante_m = Reel;}
+    /**
+     * \fn modeFraction()
+     * \brief Fonction : Bascule le calculateur en mode fraction
+     */
+    void modeFraction(){typeConstante_m = Fraction;}
+    /**
+     * \fn modeComplexe()
+     * \brief Fonction : Bascule le calculateur en mode complexe
+     */
+    void modeComplexe(){typeConstante_m = Complexe;}
     /**
      * \fn void insererElement(const std::string& s)
      * \brief Fonction : décomposer un objet string en une suite d'opérandes et d'opérateurs, insère les opérandes dans la pile de stockage, puis lance les opérations correspondant aux opérateurs
@@ -96,6 +130,86 @@ public:
      */
     void drop();
     /**
+     * \fn void pow()
+     * \brief Fonction : Dépile deux éléments a et b et effectue a^b
+     */
+    void pow();
+    /**
+     * \fn void mod()
+     * \brief Fonction : Dépile deux éléments a et b et effectue a%b
+     */
+    void mod();
+    /**
+     * \fn void sign()
+     * \brief Fonction : Inverse le signe du premier élément de la pile
+     */
+    void sign();
+    /**
+     * \fn void sin()
+     * \brief Fonction : Effectue le sinus du premier élément de la pile
+     */
+    void sin();
+    /**
+     * \fn void cos()
+     * \brief Fonction : Effectue le cosinus du premier élément de la pile
+     */
+    void cos();
+    /**
+     * \fn void tan()
+     * \brief Fonction : Effectue la tangente du premier élément de la pile
+     */
+    void tan();
+    /**
+     * \fn void sinh()
+     * \brief Fonction : Effectue le sinus hyperbolique du premier élément de la pile
+     */
+    void sinh();
+    /**
+     * \fn void cosh()
+     * \brief Fonction : Effectue le cosinus hyperbolique du premier élément de la pile
+     */
+    void cosh();
+    /**
+     * \fn void tanh()
+     * \brief Fonction : Effectue la tangente hyperbolique du premier élément de la pile
+     */
+    void tanh();
+    /**
+     * \fn void ln()
+     * \brief Fonction : Effectue le logarithme népérien du premier élément de la pile
+     */
+    void ln();
+    /**
+     * \fn void log()
+     * \brief Fonction : Effectue le logarithme décimal du premier élément de la pile
+     */
+    void log();
+    /**
+     * \fn void inv()
+     * \brief Fonction : Calcul l'inverse du premier élément de la pile
+     */
+    void inv();
+    /**
+     * \fn void sqrt()
+     * \brief Fonction : Calcul la racine carrée du premier élément de la pile
+     */
+    void sqrt();
+    /**
+     * \fn void sqr()
+     * \brief Fonction : Calcul le carrée du premier élément de la pile
+     */
+    void sqr();
+    /**
+     * \fn void cube()
+     * \brief Fonction : Calcul le cube du premier élément de la pile
+     */
+    void cube();
+    /**
+     * \fn void factorielle()
+     * \brief Fonction : Calcul le factorielle du premier élément de la pile
+     */
+    void factorielle();
+    /**
      * \fn void afficherPile(std::ostream& f=std::cout)
      * \brief Fonction : affiche le contenu de la pile dans un flux
      *
@@ -103,5 +217,24 @@ public:
      */
     void afficherPile(std::ostream& f=std::cout);
 };
+
+/**
+ * \fn float PGCD(float n, float d);
+ * \brief Fonction : Calcul le PGCD de deux réels
+ *
+ * \param n : premier réel
+ * \param d : deuxième réel
+ * \return Retourne le PGCD de n et d
+ */
+float PGCD(float n, float d);
+/**
+ * \fn float getFraction(float a, float* denominateur);
+ * \brief Fonction : Convertie le réel a en fraction
+ *
+ * \param a : réel à convertir
+ * \param d : pointeur sur le dénominateur de la fraction
+ * \return Retourne le numérateur de la fraction
+ */
+float getFraction(float a, float* denominateur);
 
 #endif // CALCULATEUR_H
