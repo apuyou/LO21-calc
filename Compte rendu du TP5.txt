@@ -1,0 +1,22 @@
+Compte rendu du TP du 22/05/12
+
+Complexe
+
+On peut utiliser la classe prédéfinie complexe. (Autorisation spéciale de la chargée de TP). 
+On peut utiliser une pile pour stocker la partie imaginaire. 
+Lorsque le mode complexe est coché, la pile est vidée. 
+Lorsque le mode complexe est décoché, les piles sont vidées. 
+
+Autres modes
+
+Les autres modes n’influencent pas la pile de stockage, mais uniquement l’affichage. La seule opération dont le résultat est modifié après calcul est la division. 
+Soustraction 
+On doit s’en tenir au sujet : 
+5
+2
+-
+=> 5-2=3
+
+Conversion des floats en fraction
+
+Il faut implémenter une méthode qui convertie les floats en fraction, même si on peut perdre une partie des informations. 
