@@ -11,10 +11,10 @@ int main(int argc, char *argv[])
 
     Calculateur c;
     try{
-        c.insererElement("1 1 1 3 4+ 2 3 4 5 10+ + * / ");
-        c.swap(0, 1);
-        c.mean(3);
-        c.drop();
+        c.insererElement("3 5");
+        //c.swap(0, 1);
+        //c.mean(3);
+        //c.drop();
     }catch(Erreur e){
         std::cout<<e.what()<<std::endl;
     }
