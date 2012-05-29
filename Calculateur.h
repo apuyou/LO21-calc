@@ -25,7 +25,7 @@
  * \enum Mode
  * \brief Mode permet de différencier les différents types de donées utilisés
  */
-enum Mode {Entier, Reel, Fraction, Complexe};
+enum Mode {Entier, Reel, Fraction};
 
 /**
  * \class Calculateur
@@ -34,7 +34,9 @@ enum Mode {Entier, Reel, Fraction, Complexe};
 class Calculateur{
 private:
     QStack<float> pile_m; /*!< Pile de réelles permettant de stocker les résultats des opérations */
+    QStack<float> pileImaginaire_m; /*!< Pile de réelles permettant de stocker la partie imaginaires des nombres complexes */
     bool radiant_m; /*!< Booléen égal à TRUE si le mode radian et activé et FALSE si le mode degré est activé */
+    bool complexe_m; /*!< Booléen égal à TRUE si le mode complexe et activé et FALSE si le mode complexe est désactivé */
     Mode typeConstante_m; /*!< Variable de type Mode (énumération) permettant de définir le mode de constante */
 public:
     /**
@@ -69,9 +71,14 @@ public:
     void modeFraction(){typeConstante_m = Fraction;}
     /**
      * \fn modeComplexe()
-     * \brief Fonction : Bascule le calculateur en mode complexe
+     * \brief Fonction : Bascule le calculateur en mode complexe et vide la pile de stockage
      */
-    void modeComplexe(){typeConstante_m = Complexe;}
+    void modeComplexe();
+    /**
+     * \fn modeHorsComplexe()
+     * \brief Fonction : Bascule le calculateur en mode hors complexe et vide les piles de stockage
+     */
+    void modeHorsComplexe();
     /**
      * \fn void insererElement(const std::string& s)
      * \brief Fonction : décomposer un objet string en une suite d'opérandes et d'opérateurs, insère les opérandes dans la pile de stockage, puis lance les opérations correspondant aux opérateurs
