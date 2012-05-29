@@ -11,7 +11,7 @@
 
 #include "Calculateur.h"
 
-Calculateur::Calculateur() : radiant_m(true), typeConstante_m(Entier)
+Calculateur::Calculateur() : radiant_m(true), complexe_m(false), typeConstante_m(Reel)
 {}
 
 void Calculateur::modeEntier()
@@ -25,23 +25,65 @@ void Calculateur::modeEntier()
         *it = std::floor(*it);
 }
 
+void Calculateur::modeComplexe()
+{
+    if(complexe_m)
+        return;
+    complexe_m = true;
+    pile_m.clear();
+}
+
+void Calculateur::modeHorsComplexe()
+{
+    if(!complexe_m)
+        return;
+    complexe_m = false;
+    pile_m.clear();
+    pileImaginaire_m.clear();
+}
+
 void Calculateur::insererElement(const std::string &s)
 {
     //On test si l'objet string est vide, dans quel cas, on ne fait rien
     if(s.empty())
         return;
-    std::string op; // Contient un opérateur ou une opérande
+    std::string op; // Contient une opérande
+    std::string reOp; // Contient la partie réelle d'une opérande complexe
     //On utilise un itérateur pour parcourir l'objet string caractère par caractère
     std::string::const_iterator it;
     for (it=s.begin(); it < s.end(); ++it){
         if(*it == ' ' || *it == '+' || *it == '-' || *it == '*' || *it == '/'){ //Si on arrive à un espace ou à un opérateur => fin d'une opérande ou d'un opérateur
-            if(!op.empty())//On vérifie que l'opérande ne soit pas vide
+            if(!op.empty() || !reOp.empty()){//On vérifie que l'opérande ne soit pas vide
                 //On ajoute l'opérande à la pile de stockage
-                pile_m.push(atof(op.c_str()));
-            op.clear();
+                if(complexe_m){
+                    //Gestion des erreurs : Si l'utilisateur rentre un réel en mode complexe, celui-ci est convertit en complexe à partie imaginaire nulle
+                    if(reOp.empty()){
+                        reOp = op;
+                        op = '0';
+                    }
+                    pile_m.push(atof(reOp.c_str()));
+                    reOp.clear();
+                    //Gestion des erreurs : Si le caractère $ n'est pas suivit d'un nombre, la partie imaginaire du complexe est nulle
+                    if(op.empty())
+                        op = '0';
+                    pileImaginaire_m.push(atof(op.c_str()));
+                }else //On traite le cas du mode hors complexe
+                    pile_m.push(atof(op.c_str()));
+                op.clear();
+            }
         }
         else if((*it >= '0' && *it <= '9') || *it =='.') //Si le caractère courant est un chiffre, on continue de dérouler l'objet string
             op += *it;
+        else if(*it == '$'){
+            //Gestion des erreurs : Si l'utilisateur tante de rentrer des complexes en dehors du mode complexe, on lève une exception
+            if(!complexe_m)
+                throw Erreur("Saisie impossible, la calculatrice n'est pas en mode complexe");
+            //Gestion des erreurs : Si le caractère $ n'est pas précédé d'un nombre, la partie réelle du complexe est nulle
+            if(op.empty())
+                op = '0';
+            reOp = op;
+            op.clear();
+        }
         //Si le caractère est un opérateur, on effectue une opération
         switch (*it){
         case '+':
@@ -58,9 +100,24 @@ void Calculateur::insererElement(const std::string &s)
             break;
         }
     }
-    if(!op.empty())//On vérifie qu'à la fin de la chaîne, l'opérande soit vide
+    if(!op.empty() || !reOp.empty())//On vérifie qu'à la fin de la chaîne, l'opérande soit vide
         //On ajoute l'opérande à la pile de stockage
-        pile_m.push(atof(op.c_str()));
+        if(complexe_m){
+            //Gestion des erreurs : Si l'utilisateur rentre un réel en mode complexe, celui-ci est convertit en complexe à partie imaginaire nulle
+            if(reOp.empty()){
+                reOp = op;
+                op = '0';
+            }
+            pile_m.push(atof(reOp.c_str()));
+            reOp.clear();
+            //Gestion des erreurs : Si le caractère $ n'est pas suivit d'un nombre, la partie imaginaire du complexe est nulle
+            if(op.empty())
+                op = '0';
+            pileImaginaire_m.push(atof(op.c_str()));
+        }
+        else if(!op.empty())//On vérifie que l'opérande ne soit pas vide
+            pile_m.push(atof(op.c_str()));
+        op.clear();
 }
 
 void Calculateur::addition()
@@ -68,8 +125,11 @@ void Calculateur::addition()
     //Gestion des erreurs : on vérifie que la pile contient au moins deux éléments
     if(pile_m.size() < 2)
         throw Erreur("La pile ne contient pas assez d'elements");
-    if(!pile_m.empty())
+    if(!pile_m.empty()){
         pile_m.push(pile_m.pop() + pile_m.pop());
+        if(complexe_m)
+            pileImaginaire_m.push(pileImaginaire_m.pop() + pileImaginaire_m.pop());
+    }
 }
 
 void Calculateur::soustraction()
@@ -77,8 +137,11 @@ void Calculateur::soustraction()
     //Gestion des erreurs : on vérifie que la pile contient au moins deux éléments
     if(pile_m.size() < 2)
         throw Erreur("La pile ne contient pas assez d'elements");
-    if(!pile_m.empty())
+    if(!pile_m.empty()){
         pile_m.push(pile_m.pop() - pile_m.pop());
+        if(complexe_m)
+            pileImaginaire_m.push(pileImaginaire_m.pop() - pileImaginaire_m.pop());
+    }
 }
 
 void Calculateur::multiplication()
@@ -86,8 +149,19 @@ void Calculateur::multiplication()
     //Gestion des erreurs : on vérifie que la pile contient au moins deux éléments
     if(pile_m.size() < 2)
         throw Erreur("La pile ne contient pas assez d'elements");
-    if(!pile_m.empty())
-        pile_m.push(pile_m.pop() * pile_m.pop());
+    if(!pile_m.empty()){
+        if(!complexe_m)
+            pile_m.push(pile_m.pop() * pile_m.pop());
+        else{
+            float a(pile_m.pop());
+            float b(pileImaginaire_m.pop());
+            float c(pile_m.pop());
+            float d(pileImaginaire_m.pop());
+            //On insère dans les piles de stockage : (a + ib)(c + id) = (ac -bd) + i(ad + bc)
+            pile_m.push(a*c - b*d);
+            pileImaginaire_m.push(a*d + b*c);
+        }
+    }
 }
 
 void Calculateur::division()
@@ -96,20 +170,32 @@ void Calculateur::division()
     if(pile_m.size() < 2)
         throw Erreur("La pile ne contient pas assez d'elements");
     float res;
-    if(!pile_m.empty())
-        res = pile_m.pop() / pile_m.pop();
-    //On modifie le résultat de la division en fonction du mode de constante
-    if(typeConstante_m == Entier)
-        res = std::floor(res);
-    pile_m.push(res);
-}
-
-void Calculateur::afficherPile(std::ostream &f)
-{
-    //On parcourt la pile avec un itérateur pour ne pas dépiler
-    QStack<float>::iterator it;
-    for(it = pile_m.begin(); it < pile_m.end() ; ++it)
-        std::cout<<*it<<std::endl;
+    if(!pile_m.empty()){
+        if(!complexe_m){
+            res = pile_m.pop() / pile_m.pop();
+            if(typeConstante_m == Entier)
+                res = std::floor(res);
+            pile_m.push(res);
+        }else{
+            float a(pile_m.pop());
+            float b(pileImaginaire_m.pop());
+            float c(pile_m.pop());
+            float d(pileImaginaire_m.pop());
+            //On insère dans la variable res, la partie réelle de la division : (a + ib) / (c + id) = ((ac + bd) +i(bc - ad)) / (c² + d²)
+            res = (a*c + b*d) / (c*c + d*d);
+            //On modifie le résultat de la division en fonction du mode de constante
+            if(typeConstante_m == Entier)
+                res = std::floor(res);
+            pile_m.push(res);
+            //Ensuite on traite le cas de la partie imaginaire
+            //On insère dans la variable res, la partie imaginaire de la division : (a + ib) / (c + id) = ((ac + bd) +i(bc - ad)) / (a² + b²)
+            res = (b*c - a*d) / (c*c + d*d);
+            //On modifie le résultat de la division en fonction du mode de constante
+            if(typeConstante_m == Entier)
+                res = std::floor(res);
+            pileImaginaire_m.push(res);
+        }
+    }
 }
 
 void Calculateur::swap(int x, int y)
@@ -120,9 +206,15 @@ void Calculateur::swap(int x, int y)
     //Il faut modifier les valeurs des indices x et y à cause de la représentation de la pile utilisé (sommet en bas)
     x = pile_m.size()-1 - x;
     y = pile_m.size()-1 - y;
-    float temp = pile_m[x];
+    float temp(pile_m[x]);
     pile_m[x] = pile_m[y];
     pile_m[y] = temp;
+    //On traite ensuite le cas particulier du mode complexe
+    if(complexe_m){
+        temp = pileImaginaire_m[x];
+        pileImaginaire_m[x] = pileImaginaire_m[y];
+        pileImaginaire_m[y] = temp;
+    }
 }
 
 void Calculateur::sum(int x)
@@ -134,6 +226,13 @@ void Calculateur::sum(int x)
     for(int i=0; i<x; ++i)
         res += pile_m.pop();
     pile_m.push(res);
+    //On traite ensuite le cas particulier du mode complexe
+    if(complexe_m){
+        res = 0;
+        for(int i=0; i<x; ++i)
+            res += pileImaginaire_m.pop();
+        pileImaginaire_m.push(res);
+    }
 }
 
 void Calculateur::mean(int x)
@@ -144,13 +243,21 @@ void Calculateur::mean(int x)
     float res(0);
     for(int i=0; i<x; ++i)
         res += pile_m.pop();
-    res /= x;
-    pile_m.push(res);
+    pile_m.push(res / x);
+    //On traite le cas du mode complexe
+    if(complexe_m){
+        res = 0;
+        for(int i=0; i<x; ++i)
+            res += pileImaginaire_m.pop();
+        //On divise la partie imaginaire par x, car x est réel
+        pileImaginaire_m.push(res / x);
+    }
 }
 
 void Calculateur::clear()
 {
     pile_m.clear();
+    pileImaginaire_m.clear();
 }
 
 void Calculateur::dup()
@@ -158,9 +265,10 @@ void Calculateur::dup()
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
-    float e(pile_m.pop());
-    pile_m.push(e);
-    pile_m.push(e);
+    pile_m.push(pile_m[pile_m.size()-1]);
+    //On traite le cas du mode complexe
+    if(complexe_m)
+        pileImaginaire_m.push(pileImaginaire_m[pileImaginaire_m.size()-1]);
 }
 
 void Calculateur::drop()
@@ -169,6 +277,9 @@ void Calculateur::drop()
     if(pile_m.isEmpty())
         return;
     pile_m.pop();
+    //On traite le cas du mode complexe
+    if(complexe_m)
+        pileImaginaire_m.pop();
 }
 
 void Calculateur::pow()
@@ -196,6 +307,8 @@ void Calculateur::sign()
     if(pile_m.isEmpty())
         return;
     pile_m.push(-pile_m.pop());
+    if(complexe_m)
+        pileImaginaire_m.push(-pileImaginaire_m.pop());
 }
 
 void Calculateur::sin()
@@ -295,8 +408,15 @@ void Calculateur::sqr()
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
-    float temp(pile_m.pop());
-    pile_m.push(temp*temp);
+    float a(pile_m.pop());
+    if(!complexe_m)
+        pile_m.push(a*a);
+    else{
+        float b(pileImaginaire_m.pop());
+        //Si on est en mode complexe, on insère (a + ib)² = (a² - b²) + i(2ab)
+        pile_m.push(a*a - b*b);
+        pileImaginaire_m.push(2*a*b);
+    }
 }
 
 void Calculateur::cube()
@@ -304,8 +424,15 @@ void Calculateur::cube()
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
-    float temp(pile_m.pop());
-    pile_m.push(temp*temp*temp);
+    float a(pile_m.pop());
+    if(!complexe_m)
+        pile_m.push(a*a*a);
+    else{
+        float b(pileImaginaire_m.pop());
+        //Si on est en mode complexe, on insère (a + ib)^3 = (a^3 - 3ab²) + i(3a²b - b^3)
+        pile_m.push(a*a*a -3*a*b*b);
+        pileImaginaire_m.push(3*a*a*b - b*b*b);
+    }
 }
 
 void Calculateur::factorielle()
@@ -327,6 +454,25 @@ void Calculateur::factorielle()
     for(int i = valeur; i > 1; --i)
         res *= i;
     pile_m.push(res);
+}
+
+void Calculateur::afficherPile(std::ostream &f)
+{
+    if(complexe_m){
+        //On parcourt les piles simulatanément avec deux itérateurs pour ne pas dépiler
+        QStack<float>::iterator reIt;
+        QStack<float>::iterator imIt;
+        imIt =pileImaginaire_m.begin();
+        for(reIt = pile_m.begin(); reIt < pile_m.end() ; ++reIt){
+            std::cout<<*reIt<<" + i"<<*imIt<<std::endl;
+            imIt++;
+        }
+    }else{
+    //On parcourt la pile avec un itérateur pour ne pas dépiler
+    QStack<float>::iterator it;
+    for(it = pile_m.begin(); it < pile_m.end() ; ++it)
+        std::cout<<*it<<std::endl;
+    }
 }
 
 float PGCD(float n, float d)
