@@ -11,18 +11,22 @@ int main(int argc, char *argv[])
 
     Calculateur c;
     try{
-        c.insererElement("2 3 3 +");
+        c.insererElement("2 3 3 /");
+        c.modeComplexe();
+        c.insererElement("1$1 2$9 3$8 $9 -");
         c.modeDegre();
         c.modeFraction();
-
+        c.sign();
+        c.drop();
         c.modeReel();
-        c.mod();
     }catch(Erreur e){
         std::cout<<e.what()<<std::endl;
     }
+    /* Test de la convertion réel => fraction
     float d;
     float n = getFraction(0.25, &d);
     std::cout<<n<<"/"<<d<<std::endl;
+    */
     c.afficherPile();
 
 #if GUI
