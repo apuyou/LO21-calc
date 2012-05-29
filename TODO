@@ -15,9 +15,11 @@ V Calculateur : Effectuer les fonctions POW, MOD et SIGN
 V Calculateur : Effectuer les opérateurs unaires
 V Calculateur : Mettre au points les différents modes (Entier, Réelle, Fraction)
 		Comment convertir les float en fraction ? Implémenter des méthodes spéciales
-- Calculateur : Mettre au point le mode Complexe
+V Calculateur : Mettre au point le mode Complexe
 		Peut-on créer une pile de parties imaginaires ? OUI
-- Calculateur : Adapter les opérateurs unaires aux complexes
+V Calculateur : Adapter les opérateurs unaires aux complexes
+		Comment afficher un complexe à partir imaginaire négative ???
+V Calculateur : Adapter les opérateurs sur pile aux complexes
 - Calculateur : Sauvegarde du contexte
 - Calculateur : Fonctions annuler et rétablir
 - Calculateur : Mettre en place les onglets
