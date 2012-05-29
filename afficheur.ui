@@ -213,7 +213,7 @@
                <string>Espace</string>
               </property>
               <property name="shortcut">
-               <string>Space, Ctrl+S</string>
+               <string>Space</string>
               </property>
              </widget>
             </item>
