@@ -11,8 +11,87 @@
 
 #include "Calculateur.h"
 
+unsigned int Calculateur::compteur = 0;
+
 Calculateur::Calculateur() : radiant_m(true), complexe_m(false), typeConstante_m(Reel)
-{}
+{
+    compteur++;
+    onglet = compteur;
+}
+
+void Calculateur::sauvegarderPiles()
+{
+    //On crée une chaine de caractère contenant le chemin du fichier
+    std::string nomFichier("pileStockage");
+    nomFichier += static_cast<char>('0'+onglet);
+    nomFichier += ".pile";
+    //On ouvre le fichier en mode écriture
+    std::ofstream fichier;
+    fichier.open(nomFichier.c_str(), ios::out);
+    //Gestion des erreurs : On test que le fichier soit ouvert correctement
+    if(fichier.bad())
+        throw Erreur("Ouverture du fichier " + nomFichier + " impoossible");
+    //On stocke l'ensemble de la pile des réels dans le fichier
+    QStack<float>::iterator it;
+    for(it = pile_m.begin(); it < pile_m.end() ; ++it)
+        fichier<<*it<<std::endl;
+    fichier.close();
+    if(complexe_m){
+        //On crée une chaine de caractère contenant le chemin du fichier
+        std::string nomFichier("pileComplexes");
+        nomFichier += static_cast<char>('0'+onglet);
+        nomFichier += ".pile";
+        //On ouvre le fichier pour la pile des complexes
+        fichier.open(nomFichier.c_str(), ios::out);
+        //Gestion des erreurs : On test que le fichier soit ouvert correctement
+        if(fichier.bad())
+            throw Erreur("Ouverture du fichier " + nomFichier + " impoossible");
+        //On stocke l'ensemble de la pile des réels dans le fichier
+        QStack<float>::iterator it;
+        for(it = pileImaginaire_m.begin(); it < pileImaginaire_m.end() ; ++it)
+            fichier<<*it<<std::endl;
+        fichier.close();
+    }
+}
+
+void Calculateur::chargerPiles()
+{
+    //On crée une chaine de caractère contenant le chemin du fichier
+    std::string nomFichier("pileStockage");
+    nomFichier += static_cast<char>('0'+onglet);
+    nomFichier += ".pile";
+    //On ouvre le fichier en mode lecture s'il existe
+    ifstream fichier(nomFichier.c_str());
+    if(fichier){
+        //On insère les éléments du fichier dans la pile
+        pile_m.clear();
+        float nb;
+        while(!fichier.eof()){
+            fichier >> nb;
+            pile_m.push(nb);
+        }
+        fichier.close();
+        //On traite le cas du mode complexe
+        if(complexe_m){
+            //On crée une chaine de caractère contenant le chemin du fichier
+            std::string nomFichier("pileComplexes");
+            nomFichier += static_cast<char>('0'+onglet);
+            nomFichier += ".pile";
+            //On ouvre le fichier pour la pile des complexes
+            fichier.open(nomFichier.c_str(), ios::in);
+            //Gestion des erreurs : On test que le fichier soit ouvert correctement
+            if(fichier.bad())
+                throw Erreur("Ouverture du fichier " + nomFichier + " impoossible");
+            //On insère les éléments du fichier dans la pile des complexes
+            pileImaginaire_m.clear();
+            while(!fichier.eof()){
+                fichier >> nb;
+                pileImaginaire_m.push(nb);
+            }
+            fichier.close();
+        }
+    }else return; //Gestion des erreurs : Si le fichier n'existe pas, il n'y a rien à charger
+}
 
 void Calculateur::modeEntier()
 {
