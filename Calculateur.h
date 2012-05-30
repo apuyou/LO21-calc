@@ -14,6 +14,7 @@
 
 #include <QStack>    //Utlisation d'une pile QStack
 #include <iostream>
+#include <fstream>   //Utilisation de fichiers
 #include "Exception.h"
 #include <string>
 #include <cstdlib>
@@ -38,12 +39,24 @@ private:
     bool radiant_m; /*!< Booléen égal à TRUE si le mode radian et activé et FALSE si le mode degré est activé */
     bool complexe_m; /*!< Booléen égal à TRUE si le mode complexe et activé et FALSE si le mode complexe est désactivé */
     Mode typeConstante_m; /*!< Variable de type Mode (énumération) permettant de définir le mode de constante */
+    static unsigned int compteur; /*!< Variable statique contant le nombre d'instances de la classe Calculateur */
+    unsigned int onglet; /*!< Variable contenant le numéro de l'onglet courant */
 public:
     /**
      * \fn Calculateur()
      * \brief Fonction : Créer une nouvelle instance de l'objet Calculateur
      */
     Calculateur();
+    /**
+     * \fn sauvegarderPiles()
+     * \brief Fonction : Sauvegarde les piles de stockage dans des fichiers
+     */
+    void sauvegarderPiles();
+    /**
+     * \fn chargerPiles()
+     * \brief Fonction : Charge les piles de stockage depuis les fichiers de sauvegarde
+     */
+    void chargerPiles();
     /**
      * \fn modeDegre()
      * \brief Fonction : Bascule le calculateur en mode degré
