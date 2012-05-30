@@ -3,7 +3,7 @@
 #include "Calculateur.h"
 #include "afficheur.h"
 
-#define GUI 1
+//#define GUI 1
 
 int main(int argc, char *argv[])
 {
@@ -13,12 +13,14 @@ int main(int argc, char *argv[])
     try{
         c.insererElement("2 3 3 /");
         c.modeComplexe();
-        c.insererElement("1$1 2$9 3$8 $9 -");
+        c.insererElement("4$1 2$20 3$8 $9 -");
         c.modeDegre();
         c.modeFraction();
         c.sign();
         c.drop();
         c.modeReel();
+        c.sauvegarderPiles();
+        c.chargerPiles();
     }catch(Erreur e){
         std::cout<<e.what()<<std::endl;
     }
