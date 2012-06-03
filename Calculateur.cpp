@@ -543,14 +543,14 @@ void Calculateur::afficherPile(std::ostream &f)
         QStack<float>::iterator imIt;
         imIt =pileImaginaire_m.begin();
         for(reIt = pile_m.begin(); reIt < pile_m.end() ; ++reIt){
-            std::cout<<*reIt<<" + i"<<*imIt<<std::endl;
+            f<<*reIt<<" + i"<<*imIt<<std::endl;
             imIt++;
         }
     }else{
     //On parcourt la pile avec un itérateur pour ne pas dépiler
     QStack<float>::iterator it;
     for(it = pile_m.begin(); it < pile_m.end() ; ++it)
-        std::cout<<*it<<std::endl;
+        f<<*it<<std::endl;
     }
 }
 
