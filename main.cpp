@@ -3,7 +3,7 @@
 #include "Calculateur.h"
 #include "afficheur.h"
 
-//#define GUI 1
+#define GUI 1
 
 int main(int argc, char *argv[])
 {
