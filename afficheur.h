@@ -25,14 +25,20 @@ private slots:
     void num9Pressed();
     void enterPressed();
     void spacePressed();
+    void opDividePressed();
+    void opMinusPressed();
+    void opPlusPressed();
+    void opTimesPressed();
+    void deletePressed();
 
 public:
     explicit Afficheur(QWidget *parent = 0);
     ~Afficheur();
 
 private:
-    Ui::Afficheur *ui;
-    Calculateur c;
+    Ui::Afficheur *ui; /* Interface graphique Qt */
+    Calculateur c;  /* Calculateur utilisé pour effectuer les opérations de l'utilisateur */
+    QStack<string> pile_aff; /* Pile de string qui sont affichés à l'utilisateur */
 };
 
 #endif // AFFICHEUR_H

@@ -19,8 +19,12 @@ Afficheur::Afficheur(QWidget *parent) :
     connect(ui->num9Button, SIGNAL(clicked()), this, SLOT(num9Pressed()));
     connect(ui->enterButton, SIGNAL(clicked()), this, SLOT(enterPressed()));
     connect(ui->spaceButton, SIGNAL(clicked()), this, SLOT(spacePressed()));
+    connect(ui->opDivideButton, SIGNAL(clicked()), this, SLOT(opDividePressed()));
+    connect(ui->opMinusButton, SIGNAL(clicked()), this, SLOT(opMinusPressed()));
+    connect(ui->opPlusButton, SIGNAL(clicked()), this, SLOT(opPlusPressed()));
+    connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(opTimesPressed()));
+    connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deletePressed()));
 }
-
 
 void Afficheur::num0Pressed(){
     ui->inputLine->setText(ui->inputLine->text() + "0");
@@ -62,19 +66,62 @@ void Afficheur::num9Pressed(){
     ui->inputLine->setText(ui->inputLine->text() + "9");
 }
 
+void Afficheur::opDividePressed(){
+    ui->inputLine->setText(ui->inputLine->text() + "/");
+}
+
+void Afficheur::opMinusPressed(){
+    ui->inputLine->setText(ui->inputLine->text() + "-");
+}
+
+void Afficheur::opPlusPressed(){
+    ui->inputLine->setText(ui->inputLine->text() + "+");
+}
+
+void Afficheur::opTimesPressed(){
+    ui->inputLine->setText(ui->inputLine->text() + "*");
+}
+
 void Afficheur::enterPressed(){
+    ui->labelStatus->setText("");
     try{
-        c.insererElement(ui->inputLine->text().toStdString());
-        std::cout << "la pile contient :";
-        c.afficherPile();
+        // Lecture de l'entrée à traiter depuis le champ texte
+        QString newElement = ui->inputLine->text();
+
+        // Si quote : stockage de l'expression dans la pile de l'afficheur
+        if(newElement.indexOf("'") == 0 && newElement.lastIndexOf("'") == newElement.length()-1){
+            ui->listWidget->addItem(newElement);
+        }
+        // Sinon, ajout de l'expression dans la pile du calculateur et stockage du retour dans l'afficheur
+        else {
+            c.insererElement(newElement.toStdString());
+            QString result = QString::number(c.getTetePile());
+
+            // Si opération binaire, on supprime les deux dernières lignes
+            if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
+                ui->listWidget->takeItem(ui->listWidget->count()-1);
+                ui->listWidget->takeItem(ui->listWidget->count()-1);
+            }
+
+            ui->listWidget->addItem(result);
+        }
+
+        // On affiche le haut de la pile et on vide le champ de saisie
+        ui->listWidget->scrollToBottom();
         ui->inputLine->setText("");
     } catch(Erreur e){
-        std::cout<<e.what()<<std::endl;
+        ui->labelStatus->setText(e.what());
     }
 }
 
 void Afficheur::spacePressed(){
     ui->inputLine->setText(ui->inputLine->text() + " ");
+}
+
+void Afficheur::deletePressed(){
+    QString aff = ui->inputLine->text();
+    aff.chop(1);
+    ui->inputLine->setText(aff);
 }
 
 Afficheur::~Afficheur()
