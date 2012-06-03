@@ -236,6 +236,13 @@ public:
      * \param f flux dans lequel on ajoute le contenu de la pile
      */
     void afficherPile(std::ostream& f=std::cout);
+
+    /**
+     * \fn float getTetePile()
+     * \brief Fonction : renvoie la tete de la pile
+     * \return Retourne l'élément tout en haut de la pile
+     */
+    float getTetePile();
 };
 
 /**

@@ -554,6 +554,10 @@ void Calculateur::afficherPile(std::ostream &f)
     }
 }
 
+float Calculateur::getTetePile(){
+    return pile_m.last();
+}
+
 float PGCD(float n, float d)
 {
     //Gestion des erreurs : pour éviter les problèmes d'utilisation d'entiers avec la fonction fmod, on convertie les float en int
