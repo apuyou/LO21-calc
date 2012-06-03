@@ -30,6 +30,9 @@ private slots:
     void opPlusPressed();
     void opTimesPressed();
     void deletePressed();
+    void complexeChanged(bool newState);
+    void anglesChanged(int index);
+    void modeChanged(int index);
 
 public:
     explicit Afficheur(QWidget *parent = 0);

@@ -7,6 +7,8 @@ Afficheur::Afficheur(QWidget *parent) :
     ui(new Ui::Afficheur)
 {
     ui->setupUi(this);
+
+    // Pavé numérique
     connect(ui->num0Button, SIGNAL(clicked()), this, SLOT(num0Pressed()));
     connect(ui->num1Button, SIGNAL(clicked()), this, SLOT(num1Pressed()));
     connect(ui->num2Button, SIGNAL(clicked()), this, SLOT(num2Pressed()));
@@ -24,6 +26,14 @@ Afficheur::Afficheur(QWidget *parent) :
     connect(ui->opPlusButton, SIGNAL(clicked()), this, SLOT(opPlusPressed()));
     connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(opTimesPressed()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deletePressed()));
+
+    // Réglages
+    connect(ui->checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
+    connect(ui->comboAngles, SIGNAL(currentIndexChanged(int)), this, SLOT(anglesChanged(int)));
+    connect(ui->comboType, SIGNAL(currentIndexChanged(int)), this, SLOT(modeChanged(int)));
+
+    // Menus
+    connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 }
 
 void Afficheur::num0Pressed(){
@@ -122,6 +132,36 @@ void Afficheur::deletePressed(){
     QString aff = ui->inputLine->text();
     aff.chop(1);
     ui->inputLine->setText(aff);
+}
+
+void Afficheur::complexeChanged(bool newState){
+    if(newState)
+        c.modeComplexe();
+    else
+        c.modeHorsComplexe();
+}
+
+void Afficheur::anglesChanged(int index){
+    if(index == 0)
+        c.modeDegre();
+    else if(index == 1)
+        c.modeRadiant();
+}
+
+void Afficheur::modeChanged(int index){
+    switch(index){
+    case 0:
+        c.modeEntier();
+        break;
+    case 1:
+        c.modeReel();
+        break;
+    case 2:
+        c.modeFraction();
+        break;
+    default:
+        break;
+    }
 }
 
 Afficheur::~Afficheur()
