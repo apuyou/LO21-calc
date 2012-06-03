@@ -30,6 +30,7 @@ private slots:
     void opPlusPressed();
     void opTimesPressed();
     void deletePressed();
+    void quotePressed();
     void complexeChanged(bool newState);
     void anglesChanged(int index);
     void modeChanged(int index);

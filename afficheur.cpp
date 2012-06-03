@@ -26,6 +26,7 @@ Afficheur::Afficheur(QWidget *parent) :
     connect(ui->opPlusButton, SIGNAL(clicked()), this, SLOT(opPlusPressed()));
     connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(opTimesPressed()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deletePressed()));
+    connect(ui->quoteButton, SIGNAL(clicked()), this, SLOT(quotePressed()));
 
     // Réglages
     connect(ui->checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -132,6 +133,10 @@ void Afficheur::deletePressed(){
     QString aff = ui->inputLine->text();
     aff.chop(1);
     ui->inputLine->setText(aff);
+}
+
+void Afficheur::quotePressed(){
+    ui->inputLine->setText(ui->inputLine->text() + "'");
 }
 
 void Afficheur::complexeChanged(bool newState){
