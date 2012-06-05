@@ -105,16 +105,18 @@ void Afficheur::enterPressed(){
         }
         // Sinon, ajout de l'expression dans la pile du calculateur et stockage du retour dans l'afficheur
         else {
-            c.insererElement(newElement.toStdString());
-            QString result = QString::number(c.getTetePile());
+            if(newElement.length() != 0){
+                c.insererElement(newElement.toStdString());
+                QString result = QString::number(c.getTetePile());
 
-            // Si opération binaire, on supprime les deux dernières lignes
-            if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
-                ui->listWidget->takeItem(ui->listWidget->count()-1);
-                ui->listWidget->takeItem(ui->listWidget->count()-1);
+                // Si opération binaire, on supprime les deux dernières lignes
+                if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
+                    ui->listWidget->takeItem(ui->listWidget->count()-1);
+                    ui->listWidget->takeItem(ui->listWidget->count()-1);
+                }
+
+                ui->listWidget->addItem(result);
             }
-
-            ui->listWidget->addItem(result);
         }
 
         // On affiche le haut de la pile et on vide le champ de saisie
