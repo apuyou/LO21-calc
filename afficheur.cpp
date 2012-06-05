@@ -65,17 +65,33 @@ void Afficheur::enterPressed(){
         }
         // Sinon, ajout de l'expression dans la pile du calculateur et stockage du retour dans l'afficheur
         else {
+            // Si effectivement il y a quelque chose dans le champ de saisie
             if(newElement.length() != 0){
-                c.insererElement(newElement.toStdString());
-                QString result = QString::number(c.getTetePile());
+                QString result = "";
 
-                // Si opération binaire, on supprime les deux dernières lignes
-                if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
-                    ui->listWidget->takeItem(ui->listWidget->count()-1);
-                    ui->listWidget->takeItem(ui->listWidget->count()-1);
+                // Si un des deux derniers éléments est une expression
+                if((ui->listWidget->item(ui->listWidget->count()-1) && ui->listWidget->item(ui->listWidget->count()-1)->text().indexOf("'") == 0)
+                        || (ui->listWidget->item(ui->listWidget->count()-2) && ui->listWidget->item(ui->listWidget->count()-2)->text().indexOf("'") == 0)){
+                    // Houla TODO
+                    cout << "non géré"<<endl;
+                }
+                // Sinon, on fait l'opération tout de suite
+                else {
+                    // On ajoute l'opérateur dans la pile
+                    c.insererElement(newElement.toStdString());
+                    // Le résultat est le premier élément de la pile
+                    result = QString::number(c.getTetePile());
+
+                    // Si opération binaire, on supprime les deux éléments précédents (qui ont servi au calcul)
+                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
+                        ui->listWidget->takeItem(ui->listWidget->count()-1);
+                        ui->listWidget->takeItem(ui->listWidget->count()-1);
+                    }
                 }
 
-                ui->listWidget->addItem(result);
+                // On ajoute le résultat tout en bas
+                if(result != "")
+                    ui->listWidget->addItem(result);
             }
         }
 
