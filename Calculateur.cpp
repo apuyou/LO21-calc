@@ -13,7 +13,7 @@
 
 unsigned int Calculateur::compteur = 0;
 
-Calculateur::Calculateur() : radiant_m(true), complexe_m(false), typeConstante_m(Reel)
+Calculateur::Calculateur() : radiant_m(false), complexe_m(false), typeConstante_m(Reel)
 {
     compteur++;
     onglet = compteur;
