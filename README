@@ -47,7 +47,7 @@ INTERFACE
   - affiche les saisies au clavier
   - reçoit des événements du clavier
   - envoie des événements à la calculatrice
-- classe AfficheurPile
+X classe AfficheurPile
 - paramètres
 - sauvegarde état
 - annuler/rétablir
