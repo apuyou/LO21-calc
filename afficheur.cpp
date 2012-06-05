@@ -1,6 +1,7 @@
 #include "afficheur.h"
 #include "ui_afficheur.h"
 #include "Calculateur.h"
+#include <QActionGroup>
 
 Afficheur::Afficheur(QWidget *parent) :
     QMainWindow(parent),

@@ -2,6 +2,7 @@
 #define AFFICHEUR_H
 
 #include <QMainWindow>
+#include <QActionGroup>
 #include "Calculateur.h"
 
 namespace Ui {
@@ -29,6 +30,7 @@ private:
     Ui::Afficheur *ui; /* Interface graphique Qt */
     Calculateur c;  /* Calculateur utilisé pour effectuer les opérations de l'utilisateur */
     QStack<string> pile_aff; /* Pile de string qui sont affichés à l'utilisateur */
+    QActionGroup *clavierGroup;
 };
 
 #endif // AFFICHEUR_H
