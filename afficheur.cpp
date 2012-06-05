@@ -55,7 +55,22 @@ Afficheur::Afficheur(QWidget *parent) :
 
 void Afficheur::genericButtonPressed(){
     QPushButton *button = (QPushButton*) sender();
-    ui->inputLine->setText(ui->inputLine->text() + button->text());
+    QString previousText = ui->inputLine->text();
+    QString newText = button->text();
+    QChar prevChar = '_', nextChar = '_';
+
+    if(previousText.length() > 0 )
+        prevChar = previousText.at(previousText.length()-1);
+    if(newText.length() > 0)
+        nextChar = newText.at(0);
+
+    // Ne pas rajouter d'espace si on est au tout début, après un espace, ou si on est en train de taper un nombre
+    if(previousText.endsWith(' ') || previousText.length() == 0
+            || (prevChar.isNumber() && nextChar.isNumber()) || (previousText.endsWith('$') || newText.startsWith('$')))
+        ui->inputLine->setText(previousText + newText);
+    // Rajouter un espace sinon
+    else
+        ui->inputLine->setText(previousText + " " + newText);
 }
 
 void Afficheur::enterPressed(){
