@@ -77,11 +77,13 @@ void Afficheur::enterPressed(){
                     // Le résultat est le premier élément de la pile
                     result = QString::number(c.getTetePile());
 
-                    // Si opération binaire, on supprime les deux éléments précédents (qui ont servi au calcul)
-                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
+                    // Si opération unaire (= pas un chiffre), on supprimer l'élément précédent
+                    if(!newElement.toInt())
                         ui->listWidget->takeItem(ui->listWidget->count()-1);
+
+                    // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
+                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
                         ui->listWidget->takeItem(ui->listWidget->count()-1);
-                    }
                 }
 
                 // On ajoute le résultat tout en bas
