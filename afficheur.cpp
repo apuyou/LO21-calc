@@ -118,6 +118,7 @@ void Afficheur::complexeChanged(bool newState){
         c.modeComplexe();
     else
         c.modeHorsComplexe();
+    ui->listWidget->clear();
 }
 
 void Afficheur::anglesChanged(int index){
