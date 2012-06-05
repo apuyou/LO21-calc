@@ -180,48 +180,48 @@ void Calculateur::insererElement(const std::string &s)
         case '!':
             factorielle();
             break;
-        case 'c':
-            if(*(it+1) == 'u') //Si la fonction est cube
+        case 'C':
+            if(*(it+1) == 'U') //Si la fonction est cube
                 cube();
-            else if(*(it+3) == 'h') //Si la fonction est cosh
+            else if(*(it+3) == 'H') //Si la fonction est cosh
                 cosh();
-            else if (*(it+2) == 's') //Sinon la fonction est cos
+            else if (*(it+2) == 'S') //Sinon la fonction est cos
                 cos();
             break;
-        case 'l':
-            if(*(it+1) == 'n') //Si la fonction est ln
+        case 'L':
+            if(*(it+1) == 'N') //Si la fonction est ln
                 ln();
-            else if(*(it+1) == 'o') //Sinon la fonction est log
+            else if(*(it+1) == 'O') //Sinon la fonction est log
                 log();
             break;
-        case 'i':
-            if(*(it+1) == 'n' && *(it+2) == 'v') //Si la fonction est inv
+        case 'I':
+            if(*(it+1) == 'N' && *(it+2) == 'V') //Si la fonction est inv
                 inv();
             break;
-        case 'm':
-            if(*(it+1) == 'o') //Si la fonction est mod
+        case 'M':
+            if(*(it+1) == 'O') //Si la fonction est mod
                 mod();
             break;
-        case 'p':
-            if(*(it+1) == 'o') //Si la fonction est pow
+        case 'P':
+            if(*(it+1) == 'O') //Si la fonction est pow
                 pow();
             break;
-        case 's':
-            if(*(it+2) == 'g') //Si la fonction est sign
+        case 'S':
+            if(*(it+2) == 'G') //Si la fonction est sign
                 sign();
-            else if(*(it+3) == 'h') //Si la fonction est sinh
+            else if(*(it+3) == 'H') //Si la fonction est sinh
                 sinh();
-            else if(*(it+2) == 'n') //Si la fonction est sin
+            else if(*(it+2) == 'N') //Si la fonction est sin
                 sin();
-            else if(*(it+1) == 'q' && *(it+3) == 't') //Si la fonction est sqrt
+            else if(*(it+1) == 'Q' && *(it+3) == 'T') //Si la fonction est sqrt
                 sqrt();
-            else if(*(it+1) == 'q') //Sinon la fonction est sqr
+            else if(*(it+1) == 'Q') //Sinon la fonction est sqr
                 sqr();
             break;
-        case 't':
-            if(*(it+2) == 'n' && *(it+3) == 'h') //Si la fonction est tanh
+        case 'T':
+            if(*(it+2) == 'N' && *(it+3) == 'H') //Si la fonction est tanh
                 tanh();
-            else if(*(it+2) == 'n') //Sinon la fonction est tan
+            else if(*(it+2) == 'N') //Sinon la fonction est tan
                 tan();
             break;
         default:
