@@ -471,7 +471,8 @@ void Calculateur::inv()
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
-    pile_m.push(1/(pile_m.pop()));
+    pile_m.push(1);
+    division();
 }
 
 void Calculateur::sqrt()
