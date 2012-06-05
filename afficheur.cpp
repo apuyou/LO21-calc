@@ -1,6 +1,7 @@
 #include "afficheur.h"
 #include "ui_afficheur.h"
 #include "Calculateur.h"
+#include <QActionGroup>
 
 Afficheur::Afficheur(QWidget *parent) :
     QMainWindow(parent),
@@ -9,24 +10,24 @@ Afficheur::Afficheur(QWidget *parent) :
     ui->setupUi(this);
 
     // Pavé numérique
-    connect(ui->num0Button, SIGNAL(clicked()), this, SLOT(num0Pressed()));
-    connect(ui->num1Button, SIGNAL(clicked()), this, SLOT(num1Pressed()));
-    connect(ui->num2Button, SIGNAL(clicked()), this, SLOT(num2Pressed()));
-    connect(ui->num3Button, SIGNAL(clicked()), this, SLOT(num3Pressed()));
-    connect(ui->num4Button, SIGNAL(clicked()), this, SLOT(num4Pressed()));
-    connect(ui->num5Button, SIGNAL(clicked()), this, SLOT(num5Pressed()));
-    connect(ui->num6Button, SIGNAL(clicked()), this, SLOT(num6Pressed()));
-    connect(ui->num7Button, SIGNAL(clicked()), this, SLOT(num7Pressed()));
-    connect(ui->num8Button, SIGNAL(clicked()), this, SLOT(num8Pressed()));
-    connect(ui->num9Button, SIGNAL(clicked()), this, SLOT(num9Pressed()));
+    connect(ui->num0Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num1Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num2Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num3Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num4Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num5Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num6Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num7Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num8Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->num9Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(ui->enterButton, SIGNAL(clicked()), this, SLOT(enterPressed()));
     connect(ui->spaceButton, SIGNAL(clicked()), this, SLOT(spacePressed()));
-    connect(ui->opDivideButton, SIGNAL(clicked()), this, SLOT(opDividePressed()));
-    connect(ui->opMinusButton, SIGNAL(clicked()), this, SLOT(opMinusPressed()));
-    connect(ui->opPlusButton, SIGNAL(clicked()), this, SLOT(opPlusPressed()));
-    connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(opTimesPressed()));
+    connect(ui->opDivideButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->opMinusButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->opPlusButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deletePressed()));
-    connect(ui->quoteButton, SIGNAL(clicked()), this, SLOT(quotePressed()));
+    connect(ui->quoteButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
 
     // Réglages
     connect(ui->checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -35,62 +36,22 @@ Afficheur::Afficheur(QWidget *parent) :
 
     // Menus
     connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
+
+    clavierGroup = new QActionGroup(this);
+    clavierGroup->addAction(ui->actionPas_de_clavier);
+    clavierGroup->addAction(ui->actionClavier_simple);
+    clavierGroup->addAction(ui->actionClavier_etendu);
 }
 
-void Afficheur::num0Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "0");
-}
+void Afficheur::genericButtonPressed(){
+    QPushButton *button = (QPushButton*) sender();
+    QString texte = ui->inputLine->text();
+    QString newTexte = button->text();
 
-void Afficheur::num1Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "1");
-}
-
-void Afficheur::num2Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "2");
-}
-
-void Afficheur::num3Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "3");
-}
-
-void Afficheur::num4Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "4");
-}
-
-void Afficheur::num5Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "5");
-}
-
-void Afficheur::num6Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "6");
-}
-
-void Afficheur::num7Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "7");
-}
-
-void Afficheur::num8Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "8");
-}
-
-void Afficheur::num9Pressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "9");
-}
-
-void Afficheur::opDividePressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "/");
-}
-
-void Afficheur::opMinusPressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "-");
-}
-
-void Afficheur::opPlusPressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "+");
-}
-
-void Afficheur::opTimesPressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "*");
+    /*if(!texte.endsWith(' ') && !texte.end()  && texte.length() > 0)
+        ui->inputLine->setText(texte + ' ' + newTexte);
+    else
+        ui->inputLine->setText(texte + newTexte);*/
 }
 
 void Afficheur::enterPressed(){
@@ -105,17 +66,33 @@ void Afficheur::enterPressed(){
         }
         // Sinon, ajout de l'expression dans la pile du calculateur et stockage du retour dans l'afficheur
         else {
+            // Si effectivement il y a quelque chose dans le champ de saisie
             if(newElement.length() != 0){
-                c.insererElement(newElement.toStdString());
-                QString result = QString::number(c.getTetePile());
+                QString result = "";
 
-                // Si opération binaire, on supprime les deux dernières lignes
-                if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
-                    ui->listWidget->takeItem(ui->listWidget->count()-1);
-                    ui->listWidget->takeItem(ui->listWidget->count()-1);
+                // Si un des deux derniers éléments est une expression
+                if((ui->listWidget->item(ui->listWidget->count()-1) && ui->listWidget->item(ui->listWidget->count()-1)->text().indexOf("'") == 0)
+                        || (ui->listWidget->item(ui->listWidget->count()-2) && ui->listWidget->item(ui->listWidget->count()-2)->text().indexOf("'") == 0)){
+                    // Houla TODO
+                    cout << "non géré"<<endl;
+                }
+                // Sinon, on fait l'opération tout de suite
+                else {
+                    // On ajoute l'opérateur dans la pile
+                    c.insererElement(newElement.toStdString());
+                    // Le résultat est le premier élément de la pile
+                    result = QString::number(c.getTetePile());
+
+                    // Si opération binaire, on supprime les deux éléments précédents (qui ont servi au calcul)
+                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")){
+                        ui->listWidget->takeItem(ui->listWidget->count()-1);
+                        ui->listWidget->takeItem(ui->listWidget->count()-1);
+                    }
                 }
 
-                ui->listWidget->addItem(result);
+                // On ajoute le résultat tout en bas
+                if(result != "")
+                    ui->listWidget->addItem(result);
             }
         }
 
@@ -137,15 +114,12 @@ void Afficheur::deletePressed(){
     ui->inputLine->setText(aff);
 }
 
-void Afficheur::quotePressed(){
-    ui->inputLine->setText(ui->inputLine->text() + "'");
-}
-
 void Afficheur::complexeChanged(bool newState){
     if(newState)
         c.modeComplexe();
     else
         c.modeHorsComplexe();
+    ui->listWidget->clear();
 }
 
 void Afficheur::anglesChanged(int index){
