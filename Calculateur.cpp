@@ -10,6 +10,7 @@
  */
 
 #include "Calculateur.h"
+#include <QString>
 
 unsigned int Calculateur::compteur = 0;
 
@@ -643,8 +644,11 @@ void Calculateur::afficherPile(std::ostream &f)
     }
 }
 
-float Calculateur::getTetePile(){
-    return pile_m.last();
+QString Calculateur::getTetePile(){
+    if(complexe_m)
+        return QString::number(pile_m.last()) + "$" + QString::number(pileImaginaire_m.last());
+
+    return QString::number(pile_m.last());
 }
 
 float PGCD(float n, float d)

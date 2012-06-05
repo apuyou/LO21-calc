@@ -100,15 +100,16 @@ void Afficheur::enterPressed(){
                     // On ajoute l'opérateur dans la pile
                     c.insererElement(newElement.toStdString());
                     // Le résultat est le premier élément de la pile
-                    result = QString::number(c.getTetePile());
+                    result = c.getTetePile();
 
-                    // Si opération unaire (= pas un chiffre), on supprimer l'élément précédent
-                    if(!newElement.toInt())
+                    // Si opération unaire (= pas un chiffre ou un complexe), on supprimer l'élément précédent
+                    if(!newElement.toFloat() && newElement.indexOf('$') == -1){
                         ui->listWidget->takeItem(ui->listWidget->count()-1);
 
-                    // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
-                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
-                        ui->listWidget->takeItem(ui->listWidget->count()-1);
+                        // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
+                        if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
+                            ui->listWidget->takeItem(ui->listWidget->count()-1);
+                    }
                 }
 
                 // On ajoute le résultat tout en bas

@@ -21,6 +21,7 @@
 #include <algorithm> //Fonctions min et max
 #define _USE_MATH_DEFINES //Permet d'utiliser pi : M_PI
 #include <cmath>
+#include <QString>
 
 /**
  * \enum Mode
@@ -245,11 +246,11 @@ public:
     void afficherPile(std::ostream& f=std::cout);
 
     /**
-     * \fn float getTetePile()
+     * \fn QString getTetePile()
      * \brief Fonction : renvoie la tete de la pile
      * \return Retourne l'élément tout en haut de la pile
      */
-    float getTetePile();
+    QString getTetePile();
 };
 
 /**
