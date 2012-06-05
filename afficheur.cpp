@@ -45,13 +45,7 @@ Afficheur::Afficheur(QWidget *parent) :
 
 void Afficheur::genericButtonPressed(){
     QPushButton *button = (QPushButton*) sender();
-    QString texte = ui->inputLine->text();
-    QString newTexte = button->text();
-
-    /*if(!texte.endsWith(' ') && !texte.end()  && texte.length() > 0)
-        ui->inputLine->setText(texte + ' ' + newTexte);
-    else
-        ui->inputLine->setText(texte + newTexte);*/
+    ui->inputLine->setText(ui->inputLine->text() + button->text());
 }
 
 void Afficheur::enterPressed(){
