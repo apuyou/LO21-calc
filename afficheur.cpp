@@ -20,6 +20,10 @@ Afficheur::Afficheur(QWidget *parent) :
     connect(ui->num7Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(ui->num8Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(ui->num9Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->decimalButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->dollarButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+
+    // Opérateurs
     connect(ui->enterButton, SIGNAL(clicked()), this, SLOT(enterPressed()));
     connect(ui->spaceButton, SIGNAL(clicked()), this, SLOT(spacePressed()));
     connect(ui->opDivideButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
@@ -28,6 +32,12 @@ Afficheur::Afficheur(QWidget *parent) :
     connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deletePressed()));
     connect(ui->quoteButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->sinButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->sinhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->cosButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->coshButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->tanButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(ui->tanhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
 
     // Réglages
     connect(ui->checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
