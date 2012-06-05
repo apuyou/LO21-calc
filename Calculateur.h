@@ -122,16 +122,23 @@ public:
     /**
      * \fn void swap(int x, int y)
      * \brief Fonction : Inverse le xème élément de la pile avec le yème
+     *
+     * \param x : Entier contenant l'indice du premier élément
+     * \param y : Entier contenant l'indice du deuxième élément
      */
     void swap(int x, int y);
     /**
      * \fn void sum(int x)
      * \brief Fonction : Somme les x premiers éléments de la pile
+     *
+     * \param x : Entier désignant le nombre d'éléments à sommer
      */
     void sum(int x);
     /**
      * \fn void mean(int x)
      * \brief Fonction : Effectue la moyenne des x premiers éléments de la pile
+     *
+     * \param x : Entier désignant le nombre d'éléments compris dans la moyenne
      */
     void mean(int x);
     /**
