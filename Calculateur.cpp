@@ -177,6 +177,55 @@ void Calculateur::insererElement(const std::string &s)
         case '/':
             division();
             break;
+        case '!':
+            factorielle();
+            break;
+        case 'c':
+            if(*(it+1) == 'u') //Si la fonction est cube
+                cube();
+            else if(*(it+3) == 'h') //Si la fonction est cosh
+                cosh();
+            else if (*(it+2) == 's') //Sinon la fonction est cos
+                cos();
+            break;
+        case 'l':
+            if(*(it+1) == 'n') //Si la fonction est ln
+                ln();
+            else if(*(it+1) == 'o') //Sinon la fonction est log
+                log();
+            break;
+        case 'i':
+            if(*(it+1) == 'n' && *(it+2) == 'v') //Si la fonction est inv
+                inv();
+            break;
+        case 'm':
+            if(*(it+1) == 'o') //Si la fonction est mod
+                mod();
+            break;
+        case 'p':
+            if(*(it+1) == 'o') //Si la fonction est pow
+                pow();
+            break;
+        case 's':
+            if(*(it+2) == 'g') //Si la fonction est sign
+                sign();
+            else if(*(it+3) == 'h') //Si la fonction est sinh
+                sinh();
+            else if(*(it+2) == 'n') //Si la fonction est sin
+                sin();
+            else if(*(it+1) == 'q' && *(it+3) == 't') //Si la fonction est sqrt
+                sqrt();
+            else if(*(it+1) == 'q') //Sinon la fonction est sqr
+                sqr();
+            break;
+        case 't':
+            if(*(it+2) == 'n' && *(it+3) == 'h') //Si la fonction est tanh
+                tanh();
+            else if(*(it+2) == 'n') //Sinon la fonction est tan
+                tan();
+            break;
+        default:
+            break;
         }
     }
     if(!op.empty() || !reOp.empty())//On vérifie qu'à la fin de la chaîne, l'opérande soit vide
@@ -363,6 +412,9 @@ void Calculateur::drop()
 
 void Calculateur::pow()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : on vérifie que la pile contient au moins 2 éléments
     if(pile_m.size() < 2)
         throw Erreur("Pow impossible : la pile ne contient pas assez d'elements pour effectuer la puissance");
@@ -371,6 +423,9 @@ void Calculateur::pow()
 
 void Calculateur::mod()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : on vérifie que la pile contient au moins 2 éléments
     if(pile_m.size() < 2)
         throw Erreur("Mod impossible : la pile ne contient pas assez d'elements pour effectuer le modulo");
@@ -392,6 +447,9 @@ void Calculateur::sign()
 
 void Calculateur::sin()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -404,6 +462,9 @@ void Calculateur::sin()
 
 void Calculateur::cos()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -416,6 +477,9 @@ void Calculateur::cos()
 
 void Calculateur::tan()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -428,6 +492,9 @@ void Calculateur::tan()
 
 void Calculateur::sinh()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -436,6 +503,9 @@ void Calculateur::sinh()
 
 void Calculateur::cosh()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -444,6 +514,9 @@ void Calculateur::cosh()
 
 void Calculateur::tanh()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -452,6 +525,9 @@ void Calculateur::tanh()
 
 void Calculateur::ln()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -460,6 +536,9 @@ void Calculateur::ln()
 
 void Calculateur::log()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -468,6 +547,9 @@ void Calculateur::log()
 
 void Calculateur::inv()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -477,6 +559,9 @@ void Calculateur::inv()
 
 void Calculateur::sqrt()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
@@ -517,6 +602,9 @@ void Calculateur::cube()
 
 void Calculateur::factorielle()
 {
+    //Gestion des erreurs : on vérifie que le mode complexe est désactivé
+    if(complexe_m)
+        throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : On vérifie que le mode de constante soit compatible avec la fonction
     if(typeConstante_m != Entier)
         return;
