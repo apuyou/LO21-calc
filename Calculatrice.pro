@@ -15,12 +15,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     Calculateur.cpp \
-    afficheur.cpp
+    afficheur.cpp \
+    onglet.cpp
 
 HEADERS += \
     Calculateur.h \
     Exception.h \
-    afficheur.h
+    afficheur.h \
+    onglet.h
 
 FORMS += \
     afficheur.ui

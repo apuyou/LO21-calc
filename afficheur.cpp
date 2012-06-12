@@ -9,41 +9,6 @@ Afficheur::Afficheur(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Pavé numérique
-    connect(ui->num0Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num1Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num2Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num3Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num4Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num5Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num6Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num7Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num8Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->num9Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->decimalButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->dollarButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-
-    // Opérateurs
-    connect(ui->enterButton, SIGNAL(clicked()), this, SLOT(enterPressed()));
-    connect(ui->spaceButton, SIGNAL(clicked()), this, SLOT(spacePressed()));
-    connect(ui->opDivideButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->opMinusButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->opPlusButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->opTimesButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(deletePressed()));
-    connect(ui->quoteButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->sinButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->sinhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->cosButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->coshButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->tanButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-    connect(ui->tanhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
-
-    // Réglages
-    connect(ui->checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
-    connect(ui->comboAngles, SIGNAL(currentIndexChanged(int)), this, SLOT(anglesChanged(int)));
-    connect(ui->comboType, SIGNAL(currentIndexChanged(int)), this, SLOT(modeChanged(int)));
-
     // Menus
     connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 
@@ -51,120 +16,11 @@ Afficheur::Afficheur(QWidget *parent) :
     clavierGroup->addAction(ui->actionPas_de_clavier);
     clavierGroup->addAction(ui->actionClavier_simple);
     clavierGroup->addAction(ui->actionClavier_etendu);
-}
 
-void Afficheur::genericButtonPressed(){
-    QPushButton *button = (QPushButton*) sender();
-    QString previousText = ui->inputLine->text();
-    QString newText = button->text();
-    QChar prevChar = '_', nextChar = '_';
+    ui->tabWidget->addTab(new onglet(this), QString("Onglet 1"));
+    ui->tabWidget->addTab(new onglet(this), QString("Onglet 2"));
+    ui->tabWidget->setCurrentIndex(0);
 
-    if(previousText.length() > 0 )
-        prevChar = previousText.at(previousText.length()-1);
-    if(newText.length() > 0)
-        nextChar = newText.at(0);
-
-    // Ne pas rajouter d'espace si on est au tout début, après un espace, ou si on est en train de taper un nombre
-    if(previousText.endsWith(' ') || previousText.length() == 0
-            || (prevChar.isNumber() && nextChar.isNumber()) || (previousText.endsWith('$') || newText.startsWith('$')))
-        ui->inputLine->setText(previousText + newText);
-    // Rajouter un espace sinon
-    else
-        ui->inputLine->setText(previousText + " " + newText);
-}
-
-void Afficheur::enterPressed(){
-    ui->labelStatus->setText("");
-    try{
-        // Lecture de l'entrée à traiter depuis le champ texte
-        QString newElement = ui->inputLine->text();
-
-        // Si quote : stockage de l'expression dans la pile de l'afficheur
-        if(newElement.indexOf("'") == 0 && newElement.lastIndexOf("'") == newElement.length()-1){
-            ui->listWidget->addItem(newElement);
-        }
-        // Sinon, ajout de l'expression dans la pile du calculateur et stockage du retour dans l'afficheur
-        else {
-            // Si effectivement il y a quelque chose dans le champ de saisie
-            if(newElement.length() != 0){
-                QString result = "";
-
-                // Si un des deux derniers éléments est une expression
-                if((ui->listWidget->item(ui->listWidget->count()-1) && ui->listWidget->item(ui->listWidget->count()-1)->text().indexOf("'") == 0)
-                        || (ui->listWidget->item(ui->listWidget->count()-2) && ui->listWidget->item(ui->listWidget->count()-2)->text().indexOf("'") == 0)){
-                    // Houla TODO
-                    cout << "non géré"<<endl;
-                }
-                // Sinon, on fait l'opération tout de suite
-                else {
-                    // On ajoute l'opérateur dans la pile
-                    c.insererElement(newElement.toStdString());
-                    // Le résultat est le premier élément de la pile
-                    result = c.getTetePile();
-
-                    // Si opération unaire (= pas un chiffre ou un complexe), on supprimer l'élément précédent
-                    if(!newElement.toFloat() && newElement.indexOf('$') == -1){
-                        ui->listWidget->takeItem(ui->listWidget->count()-1);
-
-                        // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
-                        if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
-                            ui->listWidget->takeItem(ui->listWidget->count()-1);
-                    }
-                }
-
-                // On ajoute le résultat tout en bas
-                if(result != "")
-                    ui->listWidget->addItem(result);
-            }
-        }
-
-        // On affiche le haut de la pile et on vide le champ de saisie
-        ui->listWidget->scrollToBottom();
-        ui->inputLine->setText("");
-    } catch(Erreur e){
-        ui->labelStatus->setText(e.what());
-    }
-}
-
-void Afficheur::spacePressed(){
-    ui->inputLine->setText(ui->inputLine->text() + " ");
-}
-
-void Afficheur::deletePressed(){
-    QString aff = ui->inputLine->text();
-    aff.chop(1);
-    ui->inputLine->setText(aff);
-}
-
-void Afficheur::complexeChanged(bool newState){
-    if(newState)
-        c.modeComplexe();
-    else
-        c.modeHorsComplexe();
-    ui->listWidget->clear();
-}
-
-void Afficheur::anglesChanged(int index){
-    if(index == 0)
-        c.modeDegre();
-    else if(index == 1)
-        c.modeRadiant();
-}
-
-void Afficheur::modeChanged(int index){
-    switch(index){
-    case 0:
-        c.modeEntier();
-        break;
-    case 1:
-        c.modeReel();
-        break;
-    case 2:
-        c.modeFraction();
-        break;
-    default:
-        break;
-    }
 }
 
 Afficheur::~Afficheur()
