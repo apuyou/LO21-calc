@@ -103,6 +103,7 @@ private slots:
     void anglesChanged(int index);
     void modeChanged(int index);
     void evalPressed();
+    void clearPressed();
 
 public:
     Calculateur getCalculateur();

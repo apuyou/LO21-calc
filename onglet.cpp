@@ -313,6 +313,7 @@ void onglet::retranslateUi(QWidget *parent)
     cubeButton->setText(QApplication::translate("Afficheur", "CUBE", 0, QApplication::UnicodeUTF8));
     factButton->setText(QApplication::translate("Afficheur", "!", 0, QApplication::UnicodeUTF8));
     clearButton->setText(QApplication::translate("Afficheur", "CLEAR", 0, QApplication::UnicodeUTF8));
+    clearButton->setShortcut(QApplication::translate("Afficheur", "CTRL+C", 0, QApplication::UnicodeUTF8));
     swapButton->setText(QApplication::translate("Afficheur", "SWAP", 0, QApplication::UnicodeUTF8));
     evalButton->setText(QApplication::translate("Afficheur", "EVAL", 0, QApplication::UnicodeUTF8));
     comboType->clear();
@@ -367,6 +368,7 @@ void onglet::setupSignals(QWidget *parent){
     connect(tanButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(tanhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(evalButton, SIGNAL(clicked()), this, SLOT(evalPressed()));
+    connect(clearButton, SIGNAL(clicked()), this, SLOT(clearPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -516,4 +518,10 @@ void onglet::evalPressed(){
         // On évalue ce qu'il contenait (sans les quotes)
         evaluate(el);
     }
+}
+
+void onglet::clearPressed(){
+    c.clear();
+    listWidget->clear();
+    inputLine->clear();
 }
