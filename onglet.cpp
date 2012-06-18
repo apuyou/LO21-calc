@@ -263,7 +263,7 @@ void onglet::retranslateUi(QWidget *parent)
     enterButton->setShortcut(QApplication::translate("Afficheur", "Return", 0, QApplication::UnicodeUTF8));
     opDivideButton->setText(QApplication::translate("Afficheur", "/", 0, QApplication::UnicodeUTF8));
     opDivideButton->setShortcut(QApplication::translate("Afficheur", "/", 0, QApplication::UnicodeUTF8));
-    deleteButton->setText(QApplication::translate("Afficheur", "Del", 0, QApplication::UnicodeUTF8));
+    deleteButton->setText(QApplication::translate("Afficheur", "Del/DROP", 0, QApplication::UnicodeUTF8));
     deleteButton->setShortcut(QApplication::translate("Afficheur", "Backspace", 0, QApplication::UnicodeUTF8));
     opPlusButton->setText(QApplication::translate("Afficheur", "+", 0, QApplication::UnicodeUTF8));
     opPlusButton->setShortcut(QApplication::translate("Afficheur", "+", 0, QApplication::UnicodeUTF8));
@@ -459,8 +459,13 @@ void onglet::spacePressed(){
 
 void onglet::deletePressed(){
     QString aff = inputLine->text();
-    aff.chop(1);
-    inputLine->setText(aff);
+    if(aff.size() > 0){
+        aff.chop(1);
+        inputLine->setText(aff);
+    }
+    else {
+        dropPressed();
+    }
 }
 
 void onglet::complexeChanged(bool newState){
@@ -524,4 +529,16 @@ void onglet::clearPressed(){
     c.clear();
     listWidget->clear();
     inputLine->clear();
+}
+
+void onglet::dropPressed(){
+    if(listWidget->count() == 0)
+        return;
+
+    // On sort le dernier élément
+    QListWidgetItem *out = listWidget->takeItem(listWidget->count()-1);
+
+    // Si ce n'est pas une expression, on le retire aussi du calculateur
+    if(out->text().indexOf("'") == -1)
+        c.drop();
 }
