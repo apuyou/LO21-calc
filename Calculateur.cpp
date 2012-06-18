@@ -20,6 +20,60 @@ Calculateur::Calculateur() : radiant_m(false), complexe_m(false), typeConstante_
     onglet = compteur;
 }
 
+Calculateur::Calculateur(const Calculateur& c) : radiant_m(c.radiant_m), complexe_m(c.complexe_m), typeConstante_m(c.typeConstante_m)
+{
+    compteur++;
+    onglet = compteur;
+    //On copie les piles de c dans le Calculateur courant
+    if(c.complexe_m){
+        //On parcourt les piles simulatanément avec deux itérateurs pour ne pas dépiler
+        QStack<float>::const_iterator reIt;
+        QStack<float>::const_iterator imIt;
+        imIt = c.pileImaginaire_m.begin();
+        for(reIt = c.pile_m.begin(); reIt < c.pile_m.end() ; ++reIt){
+            pile_m.push(*reIt);
+            pileImaginaire_m.push(*imIt);
+            imIt++;
+        }
+    }else{
+    //On parcourt la pile avec un itérateur pour ne pas dépiler
+    QStack<float>::const_iterator it;
+    for(it = c.pile_m.begin(); it < c.pile_m.end() ; ++it)
+        pile_m.push(*it);
+    }
+}
+
+Calculateur& Calculateur::operator=(const Calculateur& c)
+{
+    if(this != &c){
+        //On vide les piles
+        pile_m.clear();
+        pileImaginaire_m.clear();
+        //On copie tous les modes du calculateur
+        radiant_m = c.radiant_m;
+        complexe_m = c.complexe_m;
+        typeConstante_m = c.typeConstante_m;
+        //On copie les piles de c dans le Calculateur courant
+        if(c.complexe_m){
+            //On parcourt les piles simulatanément avec deux itérateurs pour ne pas dépiler
+            QStack<float>::const_iterator reIt;
+            QStack<float>::const_iterator imIt;
+            imIt = c.pileImaginaire_m.begin();
+            for(reIt = c.pile_m.begin(); reIt < c.pile_m.end() ; ++reIt){
+                pile_m.push(*reIt);
+                pileImaginaire_m.push(*imIt);
+                imIt++;
+            }
+        }else{
+        //On parcourt la pile avec un itérateur pour ne pas dépiler
+        QStack<float>::const_iterator it;
+        for(it = c.pile_m.begin(); it < c.pile_m.end() ; ++it)
+            pile_m.push(*it);
+        }
+    }
+    return *this;
+}
+
 void Calculateur::sauvegarderPiles()
 {
     //On crée une chaine de caractère contenant le chemin du fichier
@@ -229,7 +283,7 @@ void Calculateur::insererElement(const std::string &s)
             break;
         }
     }
-    if(!op.empty() || !reOp.empty())//On vérifie qu'à la fin de la chaîne, l'opérande soit vide
+    if(!op.empty() || !reOp.empty()){//On vérifie qu'à la fin de la chaîne, l'opérande soit vide
         //On ajoute l'opérande à la pile de stockage
         if(complexe_m){
             //Gestion des erreurs : Si l'utilisateur rentre un réel en mode complexe, celui-ci est convertit en complexe à partie imaginaire nulle
@@ -247,6 +301,7 @@ void Calculateur::insererElement(const std::string &s)
         else if(!op.empty())//On vérifie que l'opérande ne soit pas vide
             pile_m.push(atof(op.c_str()));
         op.clear();
+    }
 }
 
 void Calculateur::addition()
