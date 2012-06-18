@@ -25,6 +25,8 @@ private slots:
     void clavierOff();
     void clavierSimple();
     void clavierEtendu();
+    void undo();
+    void redo();
 
 private:
     Ui::Afficheur *ui; /* Interface graphique Qt */

@@ -1,6 +1,6 @@
 #include "onglet.h"
 
-onglet::onglet(QWidget *parent)
+onglet::onglet(QWidget *parent):undoIndex(0)
 {
     setupUi(parent);
     retranslateUi(parent);
@@ -339,6 +339,7 @@ void onglet::evaluate(QString newElement){
 
 void onglet::enterPressed(){
     if(inputLine->text().size() > 0){
+        saveState();
         evaluate(inputLine->text().trimmed());
         inputLine->setText("");
     }
@@ -365,6 +366,7 @@ void onglet::spacePressed(){
 void onglet::deletePressed(){
     QString aff = inputLine->text();
     if(aff.size() > 0){
+        saveState();
         aff.chop(1);
         inputLine->setText(aff);
     }
@@ -373,7 +375,7 @@ void onglet::deletePressed(){
     }
 }
 
-void onglet::complexeChanged(bool newState){
+void onglet::complexeChanged(bool newState){    
     if(newState)
         c.modeComplexe();
     else
@@ -416,6 +418,7 @@ void onglet::evalPressed(){
     // Si le dernier élément de la liste d'affichage est une expression
     QString el = listWidget->item(listWidget->count()-1)->text();
     if(el.indexOf("'") == 0){
+        saveState();
         // On retire le ' de gauche
         el = el.right(el.size()-1).trimmed();
 
@@ -431,6 +434,7 @@ void onglet::evalPressed(){
 }
 
 void onglet::clearPressed(){
+    saveState();
     c.clear();
     listWidget->clear();
     inputLine->clear();
@@ -439,6 +443,8 @@ void onglet::clearPressed(){
 void onglet::dropPressed(){
     if(listWidget->count() == 0)
         return;
+
+    saveState();
 
     // On sort le dernier élément
     QListWidgetItem *out = listWidget->takeItem(listWidget->count()-1);
@@ -452,6 +458,7 @@ void onglet::dupPressed(){
     if(listWidget->count() == 0)
         return;
 
+    saveState();
     QListWidgetItem *item = listWidget->item(listWidget->count()-1);
 
     listWidget->addItem(item->text());
@@ -468,6 +475,7 @@ void onglet::popupButtonPressed(){
          tr("Nombre de lignes sur laquelle appliquer l'operation :"), 0, 0,  2147483647, 1, &ok);
 
     if(ok){
+        saveState();
         if(operation == "SUM")
             c.sum(i);
         else if(operation == "MEAN")
@@ -511,7 +519,7 @@ void onglet::swapPressed(){
             labelStatus->setText(tr("Erreur : impossible d'échanger des expressions."));
             return;
         }
-
+        saveState();
         c.swap(i, j);
 
         listWidget->takeItem(i);
@@ -567,4 +575,58 @@ float onglet::getFraction(float a, float* denominateur)
     }
     //On renvoie le numérateur et le dénominateur
     return res;
+}
+void onglet::saveState(){
+    undoIndex++;
+
+    // Copie de la liste d'affichage
+    QList<QListWidgetItem*> widgets;
+    for(int i = 0;i < listWidget->count();i++)
+        widgets.append(listWidget->item(i)->clone());
+
+    undoListItems.insert(undoIndex, widgets);
+
+    // Copie du calculateur
+    Calculateur c = getCalculateur();
+    undoCalculateur.insert(undoIndex, c);
+}
+
+void onglet::undo(){
+    if(undoIndex == 0) return;
+
+    // Si on est au bout, on sauve pour pouvoir redo jusuq'ici ensuite
+    if(undoIndex == undoCalculateur.size()){
+        saveState();
+        undoIndex--; // Pour contrer le undoIndex++ de saveState()
+    }
+
+    // On revient un pas en arrière
+    undoIndex--;
+
+    // Remplacement de la liste d'affichage
+    listWidget->clear();
+    QList<QListWidgetItem*> widgets = undoListItems.at(undoIndex);
+    for(int i = 0;i < widgets.count();i++)
+        listWidget->addItem(widgets.at(i)->clone());
+
+    // Remplacement du calculateur
+    Calculateur c = undoCalculateur.at(undoIndex);
+    setCalculateur(c);
+}
+
+void onglet::redo(){
+    if(undoIndex == undoCalculateur.size()-1) return;
+
+    // On avance d'un pas
+    undoIndex++;
+
+    // Remplacement de la liste d'affichage
+    listWidget->clear();
+    QList<QListWidgetItem*> widgets = undoListItems.at(undoIndex);
+    for(int i = 0;i < widgets.count();i++)
+        listWidget->addItem(widgets.at(i)->clone());
+
+    // Remplacement du calculateur
+    Calculateur c = undoCalculateur.at(undoIndex);
+    setCalculateur(c);
 }

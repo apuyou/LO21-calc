@@ -57,7 +57,7 @@
     <addaction name="separator"/>
     <addaction name="action_apropos"/>
    </widget>
-   <widget class="QMenu" name="menu_dition">
+   <widget class="QMenu" name="menuEdition">
     <property name="title">
      <string>Édition</string>
     </property>
@@ -73,7 +73,7 @@
     <addaction name="actionClavier_etendu"/>
    </widget>
    <addaction name="menuCalculatrice"/>
-   <addaction name="menu_dition"/>
+   <addaction name="menuEdition"/>
    <addaction name="menuAfficher"/>
    <addaction name="menuAide"/>
   </widget>
@@ -123,10 +123,16 @@
    <property name="text">
     <string>Annuler</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
   </action>
   <action name="actionRetablir">
    <property name="text">
     <string>Rétablir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
    </property>
   </action>
   <action name="actionPas_de_clavier">

@@ -101,3 +101,12 @@ void Afficheur::clavierEtendu(){
     o->clavierEtendu->show();
 }
 
+void Afficheur::undo(){
+    onglet *o = (onglet*) ui->tabWidget->currentWidget();
+    o->undo();
+}
+
+void Afficheur::redo(){
+    onglet *o = (onglet*) ui->tabWidget->currentWidget();
+    o->redo();
+}

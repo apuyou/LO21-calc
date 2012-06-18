@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Calculateur.h"
+#include <QList>
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -95,6 +96,10 @@ protected:
     void retranslateUi(QWidget *parent);
     void setupSignals(QWidget *parent);
     Calculateur c;  /* Calculateur utilisé pour effectuer les opérations de l'utilisateur */
+    QList<QList<QListWidgetItem*> > undoListItems;
+    QList<Calculateur> undoCalculateur;
+    int undoIndex;
+
     /**
      * \fn retireDerniereLigneAffichee()
      * \brief Fonction : Retire la dernière ligne de lineWidget qui n'est pas une expression
@@ -135,10 +140,13 @@ private slots:
     void dupPressed();
     void popupButtonPressed();
     void swapPressed();
+    void saveState();
 
 public:
     Calculateur getCalculateur();
     void setCalculateur(Calculateur nouveau);
+    void undo();
+    void redo();
 
 };
 
