@@ -92,6 +92,7 @@ protected:
      * \brief Fonction : Retire la dernière ligne de lineWidget qui n'est pas une expression
      */
     void retireDerniereLigneAffichee();
+    void evaluate(QString newElement);
 
 private slots:
     void genericButtonPressed();
@@ -101,6 +102,7 @@ private slots:
     void complexeChanged(bool newState);
     void anglesChanged(int index);
     void modeChanged(int index);
+    void evalPressed();
 
 };
 
