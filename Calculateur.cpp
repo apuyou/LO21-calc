@@ -487,7 +487,7 @@ void Calculateur::mod()
         throw Erreur("Mod impossible : la pile ne contient pas assez d'elements pour effectuer le modulo");
     //Gestion des erreurs : le modulo est une opération utilisable uniquement dans le mode entier
     if(typeConstante_m != Entier)
-        return;
+        throw Erreur("Mod impossible : le modulo n'est utilisable qu'en mode entier");
     pile_m.push(std::fmod(pile_m.pop(), pile_m.pop()));
 }
 
