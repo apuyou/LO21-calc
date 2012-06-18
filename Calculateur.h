@@ -49,6 +49,17 @@ public:
      */
     Calculateur();
     /**
+     * \fn Calculateur(const Calculateur& c)
+     * \brief Fonction : Créer une nouvelle instance de l'objet Calculateur en copiant une instance existante
+     */
+    Calculateur(const Calculateur& c);
+    /**
+     * \fn Calculateur& operator=(const Calculateur& c)
+     * \brief Fonction : Copie l'instance c du calculateur
+     * \return Retourne une instance du Calculateur identique à c
+     */
+    Calculateur& operator=(const Calculateur& c);
+    /**
      * \fn sauvegarderPiles()
      * \brief Fonction : Sauvegarde les piles de stockage dans des fichiers
      */
