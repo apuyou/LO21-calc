@@ -262,7 +262,7 @@ void onglet::setupUi(QWidget *parent){
 
 void onglet::retranslateUi(QWidget *parent)
 {
-    enterButton->setText(QApplication::translate("Afficheur", "ENTR\303\211E/Dup", 0, QApplication::UnicodeUTF8));
+    enterButton->setText(QApplication::translate("Afficheur", "ENTR\303\211E/DUP", 0, QApplication::UnicodeUTF8));
     enterButton->setShortcut(QApplication::translate("Afficheur", "Return", 0, QApplication::UnicodeUTF8));
     opDivideButton->setText(QApplication::translate("Afficheur", "/", 0, QApplication::UnicodeUTF8));
     opDivideButton->setShortcut(QApplication::translate("Afficheur", "/", 0, QApplication::UnicodeUTF8));
