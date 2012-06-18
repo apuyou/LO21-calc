@@ -318,7 +318,7 @@ void onglet::evaluate(QString newElement){
 
 void onglet::enterPressed(){
     if(inputLine->text().size() > 0){
-        evaluate(inputLine->text());
+        evaluate(inputLine->text().trimmed());
         inputLine->setText("");
     }
     else
