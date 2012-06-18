@@ -8,162 +8,177 @@ onglet::onglet(QWidget *parent)
 }
 
 void onglet::setupUi(QWidget *parent){
-   verticalLayout_2 = new QVBoxLayout(this);
-   horizontalLayout = new QHBoxLayout();
-   verticalLayout_3 = new QVBoxLayout();
+    verticalLayout_2 = new QVBoxLayout(this);
+    horizontalLayout = new QHBoxLayout();
+    verticalLayout_3 = new QVBoxLayout();
 
-   listWidget = new QListWidget(this);
-   verticalLayout_3->addWidget(listWidget);
+    listWidget = new QListWidget(this);
+    verticalLayout_3->addWidget(listWidget);
 
-   inputLine = new QLineEdit(this);
-   inputLine->setReadOnly(true);
-   verticalLayout_3->addWidget(inputLine);
+    inputLine = new QLineEdit(this);
+    inputLine->setReadOnly(true);
+    verticalLayout_3->addWidget(inputLine);
 
-   horizontalLayout->addLayout(verticalLayout_3);
+    horizontalLayout->addLayout(verticalLayout_3);
 
-   clavierSimple = new QWidget(this);
+    clavierSimple = new QWidget(this);
 
-   gridLayout = new QGridLayout(clavierSimple);
+    gridLayout = new QGridLayout(clavierSimple);
 
-   enterButton = new QPushButton("Entree/DUP", this);
-   gridLayout->addWidget(enterButton, 7, 0, 1, 3);
+    enterButton = new QPushButton("Entree/DUP", this);
+    gridLayout->addWidget(enterButton, 7, 0, 1, 3);
 
-   opDivideButton = new QPushButton("/", this);
-   gridLayout->addWidget(opDivideButton, 0, 0, 1, 1);
+    opDivideButton = new QPushButton("/", this);
+    gridLayout->addWidget(opDivideButton, 0, 0, 1, 1);
 
-   deleteButton = new QPushButton("Del/DROP", this);
-   gridLayout->addWidget(deleteButton, 0, 1, 1, 2);
+    deleteButton = new QPushButton("Del/DROP", this);
+    gridLayout->addWidget(deleteButton, 0, 1, 1, 2);
 
-   opPlusButton = new QPushButton("+", this);
-   gridLayout->addWidget(opPlusButton, 1, 0, 1, 1);
+    opPlusButton = new QPushButton("+", this);
+    gridLayout->addWidget(opPlusButton, 1, 0, 1, 1);
 
-   opMinusButton = new QPushButton("-", this);
-   gridLayout->addWidget(opMinusButton, 1, 1, 1, 1);
+    opMinusButton = new QPushButton("-", this);
+    gridLayout->addWidget(opMinusButton, 1, 1, 1, 1);
 
-   opTimesButton = new QPushButton("*", this);
-   gridLayout->addWidget(opTimesButton, 1, 2, 1, 1);
+    opTimesButton = new QPushButton("*", this);
+    gridLayout->addWidget(opTimesButton, 1, 2, 1, 1);
 
-   num7Button = new QPushButton("7", this);
-   gridLayout->addWidget(num7Button, 2, 0, 1, 1);
+    num7Button = new QPushButton("7", this);
+    gridLayout->addWidget(num7Button, 2, 0, 1, 1);
 
-   num8Button = new QPushButton("8", this);
-   gridLayout->addWidget(num8Button, 2, 1, 1, 1);
+    num8Button = new QPushButton("8", this);
+    gridLayout->addWidget(num8Button, 2, 1, 1, 1);
 
-   num9Button = new QPushButton("9", this);
-   gridLayout->addWidget(num9Button, 2, 2, 1, 1);
+    num9Button = new QPushButton("9", this);
+    gridLayout->addWidget(num9Button, 2, 2, 1, 1);
 
-   num4Button = new QPushButton("4", this);
-   gridLayout->addWidget(num4Button, 3, 0, 1, 1);
+    num4Button = new QPushButton("4", this);
+    gridLayout->addWidget(num4Button, 3, 0, 1, 1);
 
-   num5Button = new QPushButton("5", this);
-   gridLayout->addWidget(num5Button, 3, 1, 1, 1);
+    num5Button = new QPushButton("5", this);
+    gridLayout->addWidget(num5Button, 3, 1, 1, 1);
 
-   num6Button = new QPushButton("6", this);
-   gridLayout->addWidget(num6Button, 3, 2, 1, 1);
+    num6Button = new QPushButton("6", this);
+    gridLayout->addWidget(num6Button, 3, 2, 1, 1);
 
-   num1Button = new QPushButton("1", this);
-   gridLayout->addWidget(num1Button, 4, 0, 1, 1);
+    num1Button = new QPushButton("1", this);
+    gridLayout->addWidget(num1Button, 4, 0, 1, 1);
 
-   num2Button = new QPushButton("2", this);
-   gridLayout->addWidget(num2Button, 4, 1, 1, 1);
+    num2Button = new QPushButton("2", this);
+    gridLayout->addWidget(num2Button, 4, 1, 1, 1);
 
-   num3Button = new QPushButton("3", this);
-   gridLayout->addWidget(num3Button, 4, 2, 1, 1);
+    num3Button = new QPushButton("3", this);
+    gridLayout->addWidget(num3Button, 4, 2, 1, 1);
 
-   num0Button = new QPushButton("0", this);
-   gridLayout->addWidget(num0Button, 5, 0, 1, 1);
+    num0Button = new QPushButton("0", this);
+    gridLayout->addWidget(num0Button, 5, 0, 1, 1);
 
-   quoteButton = new QPushButton("'", this);
-   gridLayout->addWidget(quoteButton, 6, 0, 1, 1);
+    quoteButton = new QPushButton("'", this);
+    gridLayout->addWidget(quoteButton, 6, 0, 1, 1);
 
-   spaceButton = new QPushButton("Espace", this);
-   gridLayout->addWidget(spaceButton, 6, 1, 1, 2);
+    spaceButton = new QPushButton("Espace", this);
+    gridLayout->addWidget(spaceButton, 6, 1, 1, 2);
 
-   decimalButton = new QPushButton(".", this);
-   gridLayout->addWidget(decimalButton, 5, 1, 1, 1);
+    decimalButton = new QPushButton(".", this);
+    gridLayout->addWidget(decimalButton, 5, 1, 1, 1);
 
-   dollarButton = new QPushButton("$", this);
-   gridLayout->addWidget(dollarButton, 5, 2, 1, 1);
+    dollarButton = new QPushButton("$", this);
+    gridLayout->addWidget(dollarButton, 5, 2, 1, 1);
 
-   horizontalLayout->addWidget(clavierSimple);
+    horizontalLayout->addWidget(clavierSimple);
 
-   clavierEtendu = new QWidget(this);
+    clavierEtendu = new QWidget(this);
 
-   gridLayout_3 = new QGridLayout(clavierEtendu);
+    gridLayout_3 = new QGridLayout(clavierEtendu);
 
-   sinButton = new QPushButton("SIN", this);
-   gridLayout_3->addWidget(sinButton, 0, 0, 1, 1);
+    sinButton = new QPushButton("SIN", this);
+    gridLayout_3->addWidget(sinButton, 0, 0, 1, 1);
 
-   cosButton = new QPushButton("COS", this);
-   gridLayout_3->addWidget(cosButton, 1, 0, 1, 1);
+    cosButton = new QPushButton("COS", this);
+    gridLayout_3->addWidget(cosButton, 1, 0, 1, 1);
 
-   tanButton = new QPushButton("TAN", this);
-   gridLayout_3->addWidget(tanButton, 2, 0, 1, 1);
+    tanButton = new QPushButton("TAN", this);
+    gridLayout_3->addWidget(tanButton, 2, 0, 1, 1);
 
-   sinhButton = new QPushButton("SINH", this);
-   gridLayout_3->addWidget(sinhButton, 0, 1, 1, 1);
+    sinhButton = new QPushButton("SINH", this);
+    gridLayout_3->addWidget(sinhButton, 0, 1, 1, 1);
 
-   coshButton = new QPushButton("COSH", this);
-   gridLayout_3->addWidget(coshButton, 1, 1, 1, 1);
+    coshButton = new QPushButton("COSH", this);
+    gridLayout_3->addWidget(coshButton, 1, 1, 1, 1);
 
-   tanhButton = new QPushButton("TANH", this);
-   gridLayout_3->addWidget(tanhButton, 2, 1, 1, 1);
+    tanhButton = new QPushButton("TANH", this);
+    gridLayout_3->addWidget(tanhButton, 2, 1, 1, 1);
 
-   lnButton = new QPushButton("LN", this);
-   gridLayout_3->addWidget(lnButton, 3, 0, 1, 1);
+    lnButton = new QPushButton("LN", this);
+    gridLayout_3->addWidget(lnButton, 3, 0, 1, 1);
 
-   logButton = new QPushButton("LOG", this);
-   gridLayout_3->addWidget(logButton, 3, 1, 1, 1);
+    logButton = new QPushButton("LOG", this);
+    gridLayout_3->addWidget(logButton, 3, 1, 1, 1);
 
-   sqrtButton = new QPushButton("SQRT", this);
-   gridLayout_3->addWidget(sqrtButton, 4, 0, 1, 1);
+    sqrtButton = new QPushButton("SQRT", this);
+    gridLayout_3->addWidget(sqrtButton, 4, 0, 1, 1);
 
-   sqrButton = new QPushButton("SQR", this);
-   gridLayout_3->addWidget(sqrButton, 4, 1, 1, 1);
+    sqrButton = new QPushButton("SQR", this);
+    gridLayout_3->addWidget(sqrButton, 4, 1, 1, 1);
 
-   invButton = new QPushButton("INV", this);
-   gridLayout_3->addWidget(invButton, 5, 0, 1, 1);
+    invButton = new QPushButton("INV", this);
+    gridLayout_3->addWidget(invButton, 5, 0, 1, 1);
 
-   cubeButton = new QPushButton("CUBE", this);
-   gridLayout_3->addWidget(cubeButton, 5, 1, 1, 1);
+    cubeButton = new QPushButton("CUBE", this);
+    gridLayout_3->addWidget(cubeButton, 5, 1, 1, 1);
 
-   factButton = new QPushButton("!", this);
-   gridLayout_3->addWidget(factButton, 6, 1, 1, 1);
+    factButton = new QPushButton("!", this);
+    gridLayout_3->addWidget(factButton, 6, 1, 1, 1);
 
-   clearButton = new QPushButton("CLEAR", this);
-   gridLayout_3->addWidget(clearButton, 7, 1, 1, 1);
+    clearButton = new QPushButton("CLEAR", this);
+    gridLayout_3->addWidget(clearButton, 7, 1, 1, 1);
 
-   swapButton = new QPushButton("SWAP", this);
-   gridLayout_3->addWidget(swapButton, 7, 0, 1, 1);
+    swapButton = new QPushButton("SWAP", this);
+    gridLayout_3->addWidget(swapButton, 7, 0, 1, 1);
 
-   evalButton = new QPushButton("EVAL", this);
-   gridLayout_3->addWidget(evalButton, 6, 0, 1, 1);
+    evalButton = new QPushButton("EVAL", this);
+    gridLayout_3->addWidget(evalButton, 6, 0, 1, 1);
 
-   horizontalLayout->addWidget(clavierEtendu);
+    sumButton = new QPushButton("SUM", this);
+    gridLayout_3->addWidget(sumButton, 0, 2, 1, 1);
 
-   verticalLayout_2->addLayout(horizontalLayout);
+    modButton = new QPushButton("MOD", this);
+    gridLayout_3->addWidget(modButton, 1, 2, 1, 1);
 
-   horizontalLayout_3 = new QHBoxLayout();
+    powButton = new QPushButton("POW", this);
+    gridLayout_3->addWidget(powButton, 2, 2, 1, 1);
 
-   comboType = new QComboBox(this);
-   horizontalLayout_3->addWidget(comboType);
+    meanButton = new QPushButton("MEAN", this);
+    gridLayout_3->addWidget(meanButton, 3, 2, 1, 1);
 
-   comboAngles = new QComboBox(this);
-   horizontalLayout_3->addWidget(comboAngles);
+    signButton = new QPushButton("SIGN", this);
+    gridLayout_3->addWidget(signButton, 4, 2, 1, 1);
 
-   checkboxComplexes = new QCheckBox(this);
-   horizontalLayout_3->addWidget(checkboxComplexes);
+    horizontalLayout->addWidget(clavierEtendu);
 
-   horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-   horizontalLayout_3->addItem(horizontalSpacer);
+    verticalLayout_2->addLayout(horizontalLayout);
 
-   labelStatus = new QLabel(this);
-   horizontalLayout_3->addWidget(labelStatus);
+    horizontalLayout_3 = new QHBoxLayout();
 
-   verticalLayout_2->addLayout(horizontalLayout_3);
+    comboType = new QComboBox(this);
+    horizontalLayout_3->addWidget(comboType);
 
-   comboType->setCurrentIndex(1);
-   comboAngles->setCurrentIndex(0);
+    comboAngles = new QComboBox(this);
+    horizontalLayout_3->addWidget(comboAngles);
+
+    checkboxComplexes = new QCheckBox(this);
+    horizontalLayout_3->addWidget(checkboxComplexes);
+
+    horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    horizontalLayout_3->addItem(horizontalSpacer);
+
+    labelStatus = new QLabel(this);
+    horizontalLayout_3->addWidget(labelStatus);
+
+    verticalLayout_2->addLayout(horizontalLayout_3);
+
+    comboType->setCurrentIndex(1);
+    comboAngles->setCurrentIndex(0);
 }
 
 void onglet::retranslateUi(QWidget *parent)
@@ -247,6 +262,8 @@ void onglet::setupSignals(QWidget *parent){
     connect(tanhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(evalButton, SIGNAL(clicked()), this, SLOT(evalPressed()));
     connect(clearButton, SIGNAL(clicked()), this, SLOT(clearPressed()));
+    connect(sumButton, SIGNAL(clicked()), this, SLOT(popupButtonPressed()));
+    connect(signButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -292,7 +309,7 @@ void onglet::evaluate(QString newElement){
                 // Le résultat est le premier élément de la pile
                 result = c.getTetePile();
 
-                // Si opération unaire (= pas un chiffre ou un complexe ou une chaîne avec espaces), on supprimer l'élément précédent
+                // Si opération unaire (= pas un chiffre ou un complexe ou une chaîne avec espaces), on supprime l'élément précédent
                 bool isFloat;
                 newElement.toFloat(&isFloat);
                 if(!isFloat && newElement.indexOf('$') == -1 && newElement.indexOf(" ") == -1){
@@ -437,6 +454,26 @@ void onglet::dupPressed(){
     if(item->text().indexOf("'") == -1)
         c.insererElement(item->text().toStdString());
 }
+
+void onglet::popupButtonPressed(){
+    QPushButton *button = (QPushButton*) sender();
+    QString operation = button->text();
+
+    bool ok;
+    int i = QInputDialog::getInt(this, operation,
+         tr("Nombre de lignes sur laquelle appliquer l'operation :"), 0, 0,  2147483647, 1, &ok);
+
+    if(ok){
+        if(operation == "SUM"){
+            c.sum(i);
+            for(int j = 0;j<i;j++)
+                retireDerniereLigneAffichee();
+        }
+        QString result = c.getTetePile();
+        listWidget->addItem(result);
+    }
+}
+
 float onglet::PGCD(float n, float d)
 {
     //Gestion des erreurs : pour éviter les problèmes d'utilisation d'entiers avec la fonction fmod, on convertie les float en int

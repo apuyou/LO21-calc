@@ -24,6 +24,7 @@
 #include <QtGui/QTabWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <QTGui/QInputDialog>
 
 class onglet: public QWidget
 {
@@ -75,6 +76,11 @@ public:
     QPushButton *clearButton;
     QPushButton *swapButton;
     QPushButton *evalButton;
+    QPushButton *sumButton;
+    QPushButton *modButton;
+    QPushButton *signButton;
+    QPushButton *meanButton;
+    QPushButton *powButton;
     QHBoxLayout *horizontalLayout_3;
     QComboBox *comboType;
     QComboBox *comboAngles;
@@ -127,6 +133,7 @@ private slots:
     void clearPressed();
     void dropPressed();
     void dupPressed();
+    void popupButtonPressed();
 
 public:
     Calculateur getCalculateur();
