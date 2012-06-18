@@ -366,6 +366,7 @@ void onglet::setupSignals(QWidget *parent){
     connect(coshButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(tanButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(tanhButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(evalButton, SIGNAL(clicked()), this, SLOT(evalPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -393,12 +394,9 @@ void onglet::genericButtonPressed(){
         inputLine->setText(previousText + " " + newText);
 }
 
-void onglet::enterPressed(){
+void onglet::evaluate(QString newElement){
     labelStatus->setText("");
     try{
-        // Lecture de l'entrée à traiter depuis le champ texte
-        QString newElement = inputLine->text();
-
         // Si quote : stockage de l'expression dans la pile de l'afficheur
         if(newElement.indexOf("'") == 0 && newElement.lastIndexOf("'") == newElement.length()-1){
             listWidget->addItem(newElement);
@@ -431,10 +429,14 @@ void onglet::enterPressed(){
 
         // On affiche le haut de la pile et on vide le champ de saisie
         listWidget->scrollToBottom();
-        inputLine->setText("");
     } catch(Erreur e){
         labelStatus->setText(e.what());
     }
+}
+
+void onglet::enterPressed(){
+    evaluate(inputLine->text());
+    inputLine->setText("");
 }
 
 void onglet::retireDerniereLigneAffichee(){
@@ -487,5 +489,22 @@ void onglet::modeChanged(int index){
         break;
     default:
         break;
+    }
+}
+void onglet::evalPressed(){
+    // Si le dernier élément de la liste d'affichage est une expression
+    QString el = listWidget->item(listWidget->count()-1)->text();
+    if(el.indexOf("'") == 0){
+        // On retire le ' de gauche
+        el = el.right(el.size()-1).trimmed();
+
+        // S'il y a aussi un ' à la fin, on le retire
+        if(el.indexOf("'") == el.size()-1)
+            el = el.left(el.size()-1).trimmed();
+
+        // On retire le dernier élément de la pile d'affichage
+        listWidget->takeItem(listWidget->count()-1);
+        // On évalue ce qu'il contenait (sans les quotes)
+        evaluate(el);
     }
 }
