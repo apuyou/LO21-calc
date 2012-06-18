@@ -176,9 +176,6 @@ void onglet::setupUi(QWidget *parent){
     horizontalLayout_3->addWidget(labelStatus);
 
     verticalLayout_2->addLayout(horizontalLayout_3);
-
-    comboType->setCurrentIndex(1);
-    comboAngles->setCurrentIndex(0);
 }
 
 void onglet::retranslateUi(QWidget *parent)
@@ -215,6 +212,7 @@ void onglet::retranslateUi(QWidget *parent)
 #ifndef QT_NO_TOOLTIP
     comboType->setToolTip(QApplication::translate("Afficheur", "Type de constantes", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
+    comboType->setCurrentIndex(1);
 
     comboAngles->clear();
     comboAngles->insertItems(0, QStringList()
@@ -224,6 +222,7 @@ void onglet::retranslateUi(QWidget *parent)
 #ifndef QT_NO_TOOLTIP
     comboAngles->setToolTip(QApplication::translate("Afficheur", "Format des angles", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
+    comboAngles->setCurrentIndex(0);
 
     checkboxComplexes->setText(QApplication::translate("Afficheur", "&Complexes", 0, QApplication::UnicodeUTF8));
 
@@ -264,6 +263,8 @@ void onglet::setupSignals(QWidget *parent){
     connect(clearButton, SIGNAL(clicked()), this, SLOT(clearPressed()));
     connect(sumButton, SIGNAL(clicked()), this, SLOT(popupButtonPressed()));
     connect(signButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(modButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(powButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -316,7 +317,8 @@ void onglet::evaluate(QString newElement){
                     retireDerniereLigneAffichee();
 
                     // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
-                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
+                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/")
+                            || newElement == tr("MOD") || newElement == tr("POW"))
                         retireDerniereLigneAffichee();
                 }
 
