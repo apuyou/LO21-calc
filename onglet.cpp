@@ -265,6 +265,7 @@ void onglet::setupSignals(QWidget *parent){
     connect(signButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(modButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(powButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(meanButton, SIGNAL(clicked()), this, SLOT(popupButtonPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -466,11 +467,14 @@ void onglet::popupButtonPressed(){
          tr("Nombre de lignes sur laquelle appliquer l'operation :"), 0, 0,  2147483647, 1, &ok);
 
     if(ok){
-        if(operation == "SUM"){
+        if(operation == "SUM")
             c.sum(i);
-            for(int j = 0;j<i;j++)
-                retireDerniereLigneAffichee();
-        }
+        else if(operation == "MEAN")
+            c.mean(i);
+
+        for(int j = 0;j<i;j++)
+            retireDerniereLigneAffichee();
+
         QString result = c.getTetePile();
         listWidget->addItem(result);
     }
