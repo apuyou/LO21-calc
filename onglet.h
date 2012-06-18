@@ -95,6 +95,25 @@ protected:
      */
     void retireDerniereLigneAffichee();
     void evaluate(QString newElement);
+    void updateFromCalculateur();
+    /**
+     * \fn float PGCD(float n, float d);
+     * \brief Fonction : Calcul le PGCD de deux réels
+     *
+     * \param n : premier réel
+     * \param d : deuxième réel
+     * \return Retourne le PGCD de n et d
+     */
+    float PGCD(float n, float d);
+    /**
+     * \fn float getFraction(float a, float* denominateur);
+     * \brief Fonction : Convertie le réel a en fraction
+     *
+     * \param a : réel à convertir
+     * \param d : pointeur sur le dénominateur de la fraction
+     * \return Retourne le numérateur de la fraction
+     */
+    float getFraction(float a, float* denominateur);
 
 private slots:
     void genericButtonPressed();

@@ -562,3 +562,50 @@ void onglet::dupPressed(){
     if(item->text().indexOf("'") == -1)
         c.insererElement(item->text().toStdString());
 }
+float onglet::PGCD(float n, float d)
+{
+    //Gestion des erreurs : pour éviter les problèmes d'utilisation d'entiers avec la fonction fmod, on convertie les float en int
+    int a(static_cast<int> (n));
+    int b(static_cast<int> (d));
+    int c;
+    //Gestion des erreurs : on s'assure que a est plus grand que b
+    if(b > a){
+        c = b;
+        b = a;
+        a = b;
+    }
+    while(b!=0){
+        c = a%b;
+        a = b;
+        b = c;
+    }
+    return static_cast<float> (a);
+}
+
+float onglet::getFraction(float a, float* denominateur)
+{
+    //On commence par séparer la partie entière de la partie décimale
+    float res(0);
+    float P(0);
+    float intpart(0);
+    float fractpart(std::modf(a, &intpart));
+    fractpart *= 1000000;
+    //Il faut distinguer 2 cas : le réel a a une partie décimal finie ou infinie.
+    //Si le reel a a une partie décimal finie
+    if(std::fmod(fractpart, 10) == 0){
+        res = fractpart + 1000000*intpart;
+        //On simplifie la fraction
+        P = PGCD(res, 1000000);
+        res /= P;
+        *denominateur = 1000000 / P;
+    }else //Si le reel a a une partie décimal infinie
+    {
+        res = fractpart + 999999*intpart;
+        //On simplifie la fraction
+        P = PGCD(res, 999999);
+        res /= P;
+        *denominateur = 999999 / P;
+    }
+    //On renvoie le numérateur et le dénominateur
+    return res;
+}
