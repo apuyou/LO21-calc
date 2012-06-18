@@ -34,6 +34,7 @@ Afficheur::Afficheur(QWidget *parent) :
     // Menus
     connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(ui->actionNouvel_onglet, SIGNAL(triggered()), this, SLOT(nouvelOnglet()));
+    connect(ui->actionNouvel_onglet_copie, SIGNAL(triggered()), this, SLOT(nouvelOngletCopie()));
     connect(ui->actionFermer_onglet, SIGNAL(triggered()), this, SLOT(fermeOnglet()));
     connect(ui->actionPas_de_clavier, SIGNAL(triggered()), this, SLOT(clavierOff()));
     connect(ui->actionClavier_simple, SIGNAL(triggered()), this, SLOT(clavierSimple()));
@@ -52,21 +53,34 @@ void Afficheur::nouvelOnglet(){
     ui->tabWidget->setCurrentIndex(nbtab);
 }
 
-void Afficheur::nouvelOngletCopie(){
-    /*
+void Afficheur::nouvelOngletCopie(){    
     int nbtab = ui->tabWidget->count();
     int oldindex = ui->tabWidget->currentIndex();
-    (onglet)ui->tabWidget->widget(0);
-    onglet ancienonglet = (onglet)ui->tabWidget->widget(oldindex);
-    Calculateur copie = ancienonglet.getCalculateur();
-    */
-    /*ui->tabWidget->addTab(new onglet(this), QString("Onglet %1").arg(QString::number(nbtab + 1)));
-    ui->tabWidget->widget(nbtab)->setCalculateur(copie);*/
+
+    // Récupération de l'ancien calculateur
+    onglet *ancienOnglet = (onglet*) ui->tabWidget->widget(oldindex);
+    Calculateur copie = ancienOnglet->getCalculateur();
+
+    // Création du nouvel onglet et copie du calculateur
+    onglet *newOnglet = new onglet(this);
+    newOnglet->setCalculateur(copie);
+    ui->tabWidget->addTab(newOnglet, QString("Onglet %1").arg(QString::number(nbtab + 1)));
+
+    // Copie du contenu du listWidget
+    for(int i=0;i<ancienOnglet->listWidget->count();i++){
+        QListWidgetItem *item = ancienOnglet->listWidget->item(i)->clone();
+        newOnglet->listWidget->addItem(item);
+    }
+
+    // Bascule sur le nouvel onglet
+    ui->tabWidget->setCurrentIndex(nbtab);
 }
 
 void Afficheur::fermeOnglet(){
-    int index = ui->tabWidget->currentIndex();
-    ui->tabWidget->removeTab(index);
+    if(ui->tabWidget->count() > 1){
+        int index = ui->tabWidget->currentIndex();
+        ui->tabWidget->removeTab(index);
+    }
 }
 
 void Afficheur::clavierOff(){
