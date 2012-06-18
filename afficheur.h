@@ -22,6 +22,9 @@ private slots:
     void nouvelOnglet();
     void nouvelOngletCopie();
     void fermeOnglet();
+    void clavierOff();
+    void clavierSimple();
+    void clavierEtendu();
 
 private:
     Ui::Afficheur *ui; /* Interface graphique Qt */

@@ -81,6 +81,8 @@ public:
     QCheckBox *checkboxComplexes;
     QSpacerItem *horizontalSpacer;
     QLabel *labelStatus;
+    QWidget *clavierSimple;
+    QWidget *clavierEtendu;
 
 protected:
     void setupUi(QWidget *parent);

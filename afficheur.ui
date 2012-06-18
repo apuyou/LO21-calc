@@ -124,6 +124,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Pas de clavier</string>
    </property>
@@ -138,6 +141,9 @@
   </action>
   <action name="actionClavier_etendu">
    <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
     <bool>true</bool>
    </property>
    <property name="text">

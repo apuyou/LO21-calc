@@ -14,6 +14,7 @@
 #include "ui_afficheur.h"
 #include "Calculateur.h"
 #include <QActionGroup>
+#include "onglet.h"
 
 Afficheur::Afficheur(QWidget *parent) :
     QMainWindow(parent),
@@ -22,12 +23,6 @@ Afficheur::Afficheur(QWidget *parent) :
     ui->setupUi(this);
 
     setWindowTitle(tr("calcul'utc"));
-
-    // Menus
-    connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-    connect(ui->actionNouvel_onglet, SIGNAL(triggered()), this, SLOT(nouvelOnglet()));
-    connect(ui->actionFermer_onglet, SIGNAL(triggered()), this, SLOT(fermeOnglet()));
-
     clavierGroup = new QActionGroup(this);
     clavierGroup->addAction(ui->actionPas_de_clavier);
     clavierGroup->addAction(ui->actionClavier_simple);
@@ -36,6 +31,13 @@ Afficheur::Afficheur(QWidget *parent) :
     ui->tabWidget->addTab(new onglet(this), QString("Onglet 1"));
     ui->tabWidget->setCurrentIndex(0);
 
+    // Menus
+    connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(ui->actionNouvel_onglet, SIGNAL(triggered()), this, SLOT(nouvelOnglet()));
+    connect(ui->actionFermer_onglet, SIGNAL(triggered()), this, SLOT(fermeOnglet()));
+    connect(ui->actionPas_de_clavier, SIGNAL(triggered()), this, SLOT(clavierOff()));
+    connect(ui->actionClavier_simple, SIGNAL(triggered()), this, SLOT(clavierSimple()));
+    connect(ui->actionClavier_etendu, SIGNAL(triggered()), this, SLOT(clavierEtendu()));
 }
 
 Afficheur::~Afficheur()
@@ -66,3 +68,22 @@ void Afficheur::fermeOnglet(){
     int index = ui->tabWidget->currentIndex();
     ui->tabWidget->removeTab(index);
 }
+
+void Afficheur::clavierOff(){
+    onglet *o = (onglet*) ui->tabWidget->currentWidget();
+    o->clavierSimple->hide();
+    o->clavierEtendu->hide();
+}
+
+void Afficheur::clavierSimple(){
+    onglet *o = (onglet*) ui->tabWidget->currentWidget();
+    o->clavierSimple->show();
+    o->clavierEtendu->hide();
+}
+
+void Afficheur::clavierEtendu(){
+    onglet *o = (onglet*) ui->tabWidget->currentWidget();
+    o->clavierSimple->show();
+    o->clavierEtendu->show();
+}
+

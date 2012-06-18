@@ -28,8 +28,9 @@ void onglet::setupUi(QWidget *parent){
 
 
    horizontalLayout->addLayout(verticalLayout_3);
+   clavierSimple = new QWidget(this);
 
-   gridLayout = new QGridLayout();
+   gridLayout = new QGridLayout(clavierSimple);
    gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
    gridLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
    enterButton = new QPushButton(this);
@@ -134,9 +135,11 @@ void onglet::setupUi(QWidget *parent){
    gridLayout->addWidget(dollarButton, 5, 2, 1, 1);
 
 
-   horizontalLayout->addLayout(gridLayout);
+   horizontalLayout->addWidget(clavierSimple);
 
-   gridLayout_3 = new QGridLayout();
+   clavierEtendu = new QWidget(this);
+
+   gridLayout_3 = new QGridLayout(clavierEtendu);
    gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
    sinButton = new QPushButton(this);
    sinButton->setObjectName(QString::fromUtf8("sinButton"));
@@ -219,7 +222,7 @@ void onglet::setupUi(QWidget *parent){
    gridLayout_3->addWidget(evalButton, 6, 0, 1, 1);
 
 
-   horizontalLayout->addLayout(gridLayout_3);
+   horizontalLayout->addWidget(clavierEtendu);
 
 
    verticalLayout_2->addLayout(horizontalLayout);
