@@ -266,6 +266,7 @@ void onglet::setupSignals(QWidget *parent){
     connect(modButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(powButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(meanButton, SIGNAL(clicked()), this, SLOT(popupButtonPressed()));
+    connect(swapButton, SIGNAL(clicked()), this, SLOT(swapPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
@@ -477,6 +478,46 @@ void onglet::popupButtonPressed(){
 
         QString result = c.getTetePile();
         listWidget->addItem(result);
+    }
+}
+
+void onglet::swapPressed(){
+    labelStatus->setText("");
+    bool ok;
+    int i = QInputDialog::getInt(this, tr("SWAP"),
+            tr("Premier element :"), 0, 0,  2147483647, 1, &ok);
+
+    if(!ok) return;
+
+    int j = QInputDialog::getInt(this, tr("SWAP"),
+            tr("Deuxieme element :"), 0, 0,  2147483647, 1, &ok);
+
+    if(ok){
+        if(i > listWidget->count()-1 || j > listWidget->count()-1){
+            labelStatus->setText(tr("Erreur : un des index saisi est incorrect."));
+            return;
+        }
+
+        QString texti = listWidget->item(i)->text();
+        QString textj = listWidget->item(j)->text();
+
+        if(i > j){
+            int tmp = i;
+            i = j;
+            j = tmp;
+        }
+
+        if(texti.indexOf("'") != -1 || textj.indexOf("'") != -1){
+            labelStatus->setText(tr("Erreur : impossible d'échanger des expressions."));
+            return;
+        }
+
+        c.swap(i, j);
+
+        listWidget->takeItem(i);
+        listWidget->takeItem(j-1); // j-1 car i a disparu pendant cet instant
+        listWidget->insertItem(i, textj);
+        listWidget->insertItem(j, texti);
     }
 }
 

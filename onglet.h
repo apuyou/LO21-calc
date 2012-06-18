@@ -134,6 +134,7 @@ private slots:
     void dropPressed();
     void dupPressed();
     void popupButtonPressed();
+    void swapPressed();
 
 public:
     Calculateur getCalculateur();
