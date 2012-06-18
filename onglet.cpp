@@ -253,8 +253,6 @@ void onglet::setupUi(QWidget *parent){
 
    verticalLayout_2->addLayout(horizontalLayout_3);
 
-   //retranslateUi(Afficheur);
-
    comboType->setCurrentIndex(1);
    comboAngles->setCurrentIndex(0);
 }
@@ -411,27 +409,18 @@ void onglet::enterPressed(){
             if(newElement.length() != 0){
                 QString result = "";
 
-                // Si un des deux derniers éléments est une expression
-                if((listWidget->item(listWidget->count()-1) && listWidget->item(listWidget->count()-1)->text().indexOf("'") == 0)
-                        || (listWidget->item(listWidget->count()-2) && listWidget->item(listWidget->count()-2)->text().indexOf("'") == 0)){
-                    // Houla TODO
-                    cout << "non géré"<<endl;
-                }
-                // Sinon, on fait l'opération tout de suite
-                else {
-                    // On ajoute l'opérateur dans la pile
-                    c.insererElement(newElement.toStdString());
-                    // Le résultat est le premier élément de la pile
-                    result = c.getTetePile();
+                // On ajoute l'opérateur dans la pile
+                c.insererElement(newElement.toStdString());
+                // Le résultat est le premier élément de la pile
+                result = c.getTetePile();
 
-                    // Si opération unaire (= pas un chiffre ou un complexe), on supprimer l'élément précédent
-                    if(!newElement.toFloat() && newElement.indexOf('$') == -1){
-                        listWidget->takeItem(listWidget->count()-1);
+                // Si opération unaire (= pas un chiffre ou un complexe ou une chaîne avec espaces), on supprimer l'élément précédent
+                if(!newElement.toFloat() && newElement.indexOf('$') == -1 && newElement.indexOf(" ") == -1){
+                    retireDerniereLigneAffichee();
 
-                        // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
-                        if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
-                            listWidget->takeItem(listWidget->count()-1);
-                    }
+                    // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
+                    if(newElement == tr("+") || newElement == tr("-") || newElement == tr("*") || newElement == tr("/"))
+                        retireDerniereLigneAffichee();
                 }
 
                 // On ajoute le résultat tout en bas
@@ -446,6 +435,18 @@ void onglet::enterPressed(){
     } catch(Erreur e){
         labelStatus->setText(e.what());
     }
+}
+
+void onglet::retireDerniereLigneAffichee(){
+    int lookback = listWidget->count();
+    cout << "retire ";
+    // On trouve la ligne
+    do {
+        lookback--;
+    } while(lookback > -1 && listWidget->item(lookback) && listWidget->item(lookback)->text().indexOf("'") == 0);
+    cout << lookback << endl;
+    if(lookback > -1)
+        listWidget->takeItem(lookback);
 }
 
 void onglet::spacePressed(){

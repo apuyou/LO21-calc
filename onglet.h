@@ -87,6 +87,11 @@ protected:
     void retranslateUi(QWidget *parent);
     void setupSignals(QWidget *parent);
     Calculateur c;  /* Calculateur utilisé pour effectuer les opérations de l'utilisateur */
+    /**
+     * \fn retireDerniereLigneAffichee()
+     * \brief Fonction : Retire la dernière ligne de lineWidget qui n'est pas une expression
+     */
+    void retireDerniereLigneAffichee();
 
 private slots:
     void genericButtonPressed();
