@@ -418,7 +418,9 @@ void onglet::evaluate(QString newElement){
                 result = c.getTetePile();
 
                 // Si opération unaire (= pas un chiffre ou un complexe ou une chaîne avec espaces), on supprimer l'élément précédent
-                if(!newElement.toFloat() && newElement.indexOf('$') == -1 && newElement.indexOf(" ") == -1){
+                bool isFloat;
+                newElement.toFloat(&isFloat);
+                if(!isFloat && newElement.indexOf('$') == -1 && newElement.indexOf(" ") == -1){
                     retireDerniereLigneAffichee();
 
                     // Si opération binaire, on supprime le deuxième élément précédent (2ème opérande)
