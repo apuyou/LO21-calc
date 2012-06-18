@@ -491,6 +491,15 @@ void onglet::modeChanged(int index){
         break;
     }
 }
+
+Calculateur onglet::getCalculateur(){
+    return c;
+}
+
+void onglet::setCalculateur(Calculateur nouveau){
+    c = nouveau;
+}
+
 void onglet::evalPressed(){
     // Si le dernier élément de la liste d'affichage est une expression
     QString el = listWidget->item(listWidget->count()-1)->text();

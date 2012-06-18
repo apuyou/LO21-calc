@@ -104,6 +104,10 @@ private slots:
     void modeChanged(int index);
     void evalPressed();
 
+public:
+    Calculateur getCalculateur();
+    void setCalculateur(Calculateur nouveau);
+
 };
 
 #endif // ONGLET_H
