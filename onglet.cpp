@@ -439,12 +439,12 @@ void onglet::enterPressed(){
 
 void onglet::retireDerniereLigneAffichee(){
     int lookback = listWidget->count();
-    cout << "retire ";
+
     // On trouve la ligne
     do {
         lookback--;
     } while(lookback > -1 && listWidget->item(lookback) && listWidget->item(lookback)->text().indexOf("'") == 0);
-    cout << lookback << endl;
+
     if(lookback > -1)
         listWidget->takeItem(lookback);
 }
