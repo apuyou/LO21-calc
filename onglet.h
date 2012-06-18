@@ -105,6 +105,7 @@ private slots:
     void evalPressed();
     void clearPressed();
     void dropPressed();
+    void dupPressed();
 
 public:
     Calculateur getCalculateur();

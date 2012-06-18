@@ -259,7 +259,7 @@ void onglet::setupUi(QWidget *parent){
 
 void onglet::retranslateUi(QWidget *parent)
 {
-    enterButton->setText(QApplication::translate("Afficheur", "ENTR\303\211E", 0, QApplication::UnicodeUTF8));
+    enterButton->setText(QApplication::translate("Afficheur", "ENTR\303\211E/Dup", 0, QApplication::UnicodeUTF8));
     enterButton->setShortcut(QApplication::translate("Afficheur", "Return", 0, QApplication::UnicodeUTF8));
     opDivideButton->setText(QApplication::translate("Afficheur", "/", 0, QApplication::UnicodeUTF8));
     opDivideButton->setShortcut(QApplication::translate("Afficheur", "/", 0, QApplication::UnicodeUTF8));
@@ -437,8 +437,12 @@ void onglet::evaluate(QString newElement){
 }
 
 void onglet::enterPressed(){
-    evaluate(inputLine->text());
-    inputLine->setText("");
+    if(inputLine->text().size() > 0){
+        evaluate(inputLine->text());
+        inputLine->setText("");
+    }
+    else
+        dupPressed();
 }
 
 void onglet::retireDerniereLigneAffichee(){
@@ -541,4 +545,15 @@ void onglet::dropPressed(){
     // Si ce n'est pas une expression, on le retire aussi du calculateur
     if(out->text().indexOf("'") == -1)
         c.drop();
+}
+
+void onglet::dupPressed(){
+    if(listWidget->count() == 0)
+        return;
+
+    QListWidgetItem *item = listWidget->item(listWidget->count()-1);
+
+    listWidget->addItem(item->text());
+    if(item->text().indexOf("'") == -1)
+        c.insererElement(item->text().toStdString());
 }
