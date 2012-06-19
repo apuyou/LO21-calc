@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!--header-->
 <div class="contents">
 
-<p>Classe de la fenêtre principale, qui contient les onglets.  
+<p>Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations.  
  <a href="class_calculateur.html#details">Plus de détails...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_calculateur_8h_source.html">Calculateur.h</a>&gt;</code></p>
@@ -98,8 +98,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 Graphe de collaboration de Calculateur:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_calculateur__coll__graph.png" border="0" usemap="#_calculateur_coll__map" alt="Collaboration graph"/></div>
-<map name="_calculateur_coll__map" id="_calculateur_coll__map">
-</map>
 </div>
 
 <p><a href="class_calculateur-members.html">Liste de tous les membres</a></p>
@@ -107,9 +105,9 @@ Graphe de collaboration de Calculateur:</div>
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:abe841742f86700fd5395cbcf3cd9ee18"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calculateur.html#abe841742f86700fd5395cbcf3cd9ee18">Calculateur</a> ()</td></tr>
-<tr class="memdesc:abe841742f86700fd5395cbcf3cd9ee18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Calculateur</a>.  <a href="#abe841742f86700fd5395cbcf3cd9ee18"></a><br/></td></tr>
+<tr class="memdesc:abe841742f86700fd5395cbcf3cd9ee18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations...">Calculateur</a>.  <a href="#abe841742f86700fd5395cbcf3cd9ee18"></a><br/></td></tr>
 <tr class="memitem:a37cc0c7669de252904eb9ea00981b590"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calculateur.html#a37cc0c7669de252904eb9ea00981b590">Calculateur</a> (const <a class="el" href="class_calculateur.html">Calculateur</a> &amp;c)</td></tr>
-<tr class="memdesc:a37cc0c7669de252904eb9ea00981b590"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Calculateur</a> en copiant une instance existante.  <a href="#a37cc0c7669de252904eb9ea00981b590"></a><br/></td></tr>
+<tr class="memdesc:a37cc0c7669de252904eb9ea00981b590"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations...">Calculateur</a> en copiant une instance existante.  <a href="#a37cc0c7669de252904eb9ea00981b590"></a><br/></td></tr>
 <tr class="memitem:ab2cc00d5d33c253bf2073b4ec49decf3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_calculateur.html">Calculateur</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calculateur.html#ab2cc00d5d33c253bf2073b4ec49decf3">operator=</a> (const <a class="el" href="class_calculateur.html">Calculateur</a> &amp;c)</td></tr>
 <tr class="memdesc:ab2cc00d5d33c253bf2073b4ec49decf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction : Copie l'instance c du calculateur.  <a href="#ab2cc00d5d33c253bf2073b4ec49decf3"></a><br/></td></tr>
 <tr class="memitem:aa9d5f4a21095f166557eaf28ab42fcf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calculateur.html#aa9d5f4a21095f166557eaf28ab42fcf4">sauvegarderPiles</a> ()</td></tr>
@@ -205,8 +203,7 @@ Attributs privés statiques</h2></td></tr>
 <tr class="memitem:af85ee999d2d5aa80e348a84f0d2b5293"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calculateur.html#af85ee999d2d5aa80e348a84f0d2b5293">compteur</a> = 0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Description détaillée</h2>
-<div class="textblock"><p>Classe de la fenêtre principale, qui contient les onglets. </p>
-<p>Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations. </p>
+<div class="textblock"><p>Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations. </p>
 </div><hr/><h2>Documentation des constructeurs et destructeur</h2>
 <a class="anchor" id="abe841742f86700fd5395cbcf3cd9ee18"></a>
 <div class="memitem">
@@ -221,7 +218,7 @@ Attributs privés statiques</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Calculateur</a>. </p>
+<p>Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations...">Calculateur</a>. </p>
 
 </div>
 </div>
@@ -239,7 +236,7 @@ Attributs privés statiques</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Calculateur</a> en copiant une instance existante. </p>
+<p>Fonction : Créer une nouvelle instance de l'objet <a class="el" href="class_calculateur.html" title="Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations...">Calculateur</a> en copiant une instance existante. </p>
 
 </div>
 </div>
@@ -772,7 +769,7 @@ Attributs privés statiques</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Fonction : Copie l'instance c du calculateur. </p>
-<dl class="section return"><dt>Renvoie:</dt><dd>Retourne une instance du <a class="el" href="class_calculateur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Calculateur</a> identique à c </dd></dl>
+<dl class="section return"><dt>Renvoie:</dt><dd>Retourne une instance du <a class="el" href="class_calculateur.html" title="Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations...">Calculateur</a> identique à c </dd></dl>
 
 </div>
 </div>
@@ -1044,7 +1041,7 @@ Attributs privés statiques</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Variable statique contant le nombre d'instances de la classe <a class="el" href="class_calculateur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Calculateur</a> </p>
+<p>Variable statique contant le nombre d'instances de la classe <a class="el" href="class_calculateur.html" title="Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations...">Calculateur</a> </p>
 
 </div>
 </div>
@@ -1160,7 +1157,7 @@ Attributs privés statiques</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Mardi Juin 19 2012 17:55:31 pour calcul'utc par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Mardi Juin 19 2012 21:58:51 pour calcul'utc par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

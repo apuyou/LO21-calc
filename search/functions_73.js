@@ -1,7 +1,7 @@
 var searchData=
 [
   ['sauvegarderpiles',['sauvegarderPiles',['../class_calculateur.html#aa9d5f4a21095f166557eaf28ab42fcf4',1,'Calculateur']]],
-  ['sauverpiles',['sauverPiles',['../classonglet.html#a3441d050d4f9338e3248b4da0eecd190',1,'onglet']]],
+  ['sauverpiles',['sauverPiles',['../classonglet.html#a83f441009b4b6c0ea52df141b8ed9ff4',1,'onglet']]],
   ['savestate',['saveState',['../classonglet.html#aeea9d3656aa357043ace026535a6cd88',1,'onglet']]],
   ['setcalculateur',['setCalculateur',['../classonglet.html#a0b5c0f42e4373252eb999f587c454ff3',1,'onglet']]],
   ['setupsignals',['setupSignals',['../classonglet.html#af42a977fc67b3b93f48ad528ae67e39c',1,'onglet']]],

@@ -1,9 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" href="$_calculateur_8h.html" title="Contient la classe Calculateur." alt="" coords="140,84,257,111"/>
-<area shape="rect" href="$afficheur_8h.html" title="Contient la classe Afficheur." alt="" coords="63,239,161,265"/>
-<area shape="rect" href="$afficheur_8cpp.html" title="Contient les méthodes de la classe Afficheur." alt="" coords="140,316,257,343"/>
-<area shape="rect" href="$main_8cpp.html" title="main.cpp" alt="" coords="5,316,93,343"/>
-<area shape="rect" href="$onglet_8h.html" title="onglet.h" alt="" coords="159,161,239,188"/>
-<area shape="rect" href="$_calculateur_8cpp.html" title="Contient les méthodes de la classe Calculateur." alt="" coords="409,161,545,188"/>
-<area shape="rect" href="$onglet_8cpp.html" title="onglet.cpp" alt="" coords="236,239,335,265"/>
+<area shape="rect" href="$_calculateur_8h.html" title="Contient la classe Calculateur." alt="" coords="5,84,123,111"/>
 </map>

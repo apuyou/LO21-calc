@@ -94,10 +94,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="onglet_8h.html">onglet.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="namespace_ui.html">   20</a></span>&#160;<span class="keyword">namespace </span>Ui {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">class </span><a class="code" href="class_afficheur.html">Afficheur</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">class </span><a class="code" href="class_afficheur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Afficheur</a>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="class_afficheur.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_afficheur.html">Afficheur</a>: <span class="keyword">public</span> QMainWindow</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="class_afficheur.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_afficheur.html" title="Classe de la fenêtre principale, qui contient les onglets.">Afficheur</a>: <span class="keyword">public</span> QMainWindow</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
@@ -106,25 +106,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_afficheur.html#a9b0194e4c1c7bd3a818f8a2725fe73b0" title="Fonction : Destruction d&#39;un objet Afficheur.">~Afficheur</a>();</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#aff8b1f253334c76baecf2dd8ee923bbf" title="Créé un nouvel onglet.">nouvelOnglet</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a8f2a0fd7219c15a5fea51b08b0ca57f4" title="Créé un nouvel onglet en recopiant l&#39;onglet actuel.">nouvelOngletCopie</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a8bf296e7baa86cd7a58d20cbae1913d1" title="Ferme l&#39;onglet actuel.">fermeOnglet</a>();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a7e7b43507f4371772b88a161ea497cc5" title="Masque le clavier.">clavierOff</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#ac046493f181e433113b370f1789b3874" title="Affiche seulement les opérateurs les plus simples.">clavierSimple</a>();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#aa1666b49218a5c039656d5b0de8d580d" title="Affiche tous les opérateurs.">clavierEtendu</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a52385a947a2904b5efca80076e3f9d27" title="Appelle la méthode undo de l&#39;onglet actif.">undo</a>();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#ab68de2c755c9871ad0524f28c54035d2" title="Appelle la méthode redo de l&#39;onglet actif.">redo</a>();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="code" href="class_afficheur.html#a1fb785324989134f10edb62e628a1b04">   88</a></span>&#160;    Ui::Afficheur *<a class="code" href="class_afficheur.html#a1fb785324989134f10edb62e628a1b04">ui</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="class_afficheur.html#a85c7b92ea65ae70141c84266f628e287">   89</a></span>&#160;    QActionGroup *<a class="code" href="class_afficheur.html#a85c7b92ea65ae70141c84266f628e287">clavierGroup</a>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif // AFFICHEUR_H</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#aff8b1f253334c76baecf2dd8ee923bbf" title="Créé un nouvel onglet.">nouvelOnglet</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a8f2a0fd7219c15a5fea51b08b0ca57f4" title="Créé un nouvel onglet en recopiant l&#39;onglet actuel.">nouvelOngletCopie</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a8bf296e7baa86cd7a58d20cbae1913d1" title="Ferme l&#39;onglet actuel.">fermeOnglet</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a7e7b43507f4371772b88a161ea497cc5" title="Masque le clavier.">clavierOff</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#ac046493f181e433113b370f1789b3874" title="Affiche seulement les opérateurs les plus simples.">clavierSimple</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#aa1666b49218a5c039656d5b0de8d580d" title="Affiche tous les opérateurs.">clavierEtendu</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#a52385a947a2904b5efca80076e3f9d27" title="Appelle la méthode undo de l&#39;onglet actif.">undo</a>();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_afficheur.html#ab68de2c755c9871ad0524f28c54035d2" title="Appelle la méthode redo de l&#39;onglet actif.">redo</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="code" href="class_afficheur.html#a1fb785324989134f10edb62e628a1b04">   80</a></span>&#160;    Ui::Afficheur *<a class="code" href="class_afficheur.html#a1fb785324989134f10edb62e628a1b04">ui</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="code" href="class_afficheur.html#a85c7b92ea65ae70141c84266f628e287">   81</a></span>&#160;    QActionGroup *<a class="code" href="class_afficheur.html#a85c7b92ea65ae70141c84266f628e287">clavierGroup</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif // AFFICHEUR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Mardi Juin 19 2012 17:55:31 pour calcul'utc par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Mardi Juin 19 2012 21:58:51 pour calcul'utc par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

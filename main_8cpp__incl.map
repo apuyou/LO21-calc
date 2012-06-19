@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" href="$_calculateur_8h.html" title="Contient la classe Calculateur." alt="" coords="329,239,447,265"/>
-<area shape="rect" href="$afficheur_8h.html" title="Contient la classe Afficheur." alt="" coords="528,84,627,111"/>
-<area shape="rect" href="$_exception_8h.html" title="Exception.h" alt="" coords="73,316,177,343"/>
-<area shape="rect" href="$onglet_8h.html" title="onglet.h" alt="" coords="2053,161,2133,188"/>
+<area shape="rect" href="$_calculateur_8h.html" title="Contient la classe Calculateur." alt="" coords="416,161,533,188"/>
+<area shape="rect" href="$afficheur_8h.html" title="Contient la classe Afficheur." alt="" coords="469,84,568,111"/>
 </map>
