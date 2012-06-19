@@ -32,7 +32,7 @@ class onglet: public QWidget
     Q_OBJECT
 
 public:
-    onglet(QWidget *parent = 0);
+    onglet(QWidget *);
     QWidget *tab;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -92,9 +92,9 @@ public:
     QWidget *clavierEtendu;
 
 protected:
-    void setupUi(QWidget *parent);
-    void retranslateUi(QWidget *parent);
-    void setupSignals(QWidget *parent);
+    void setupUi();
+    void retranslateUi();
+    void setupSignals();
     Calculateur c;  /* Calculateur utilisé pour effectuer les opérations de l'utilisateur */
     QList<QList<QListWidgetItem*> > undoListItems;
     QList<Calculateur> undoCalculateur;

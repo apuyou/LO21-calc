@@ -1,13 +1,13 @@
 #include "onglet.h"
 
-onglet::onglet(QWidget *parent):undoIndex(0)
+onglet::onglet(QWidget *):undoIndex(0)
 {
-    setupUi(parent);
-    retranslateUi(parent);
-    setupSignals(parent);
+    setupUi();
+    retranslateUi();
+    setupSignals();
 }
 
-void onglet::setupUi(QWidget *parent){
+void onglet::setupUi(){
     verticalLayout_2 = new QVBoxLayout(this);
     horizontalLayout = new QHBoxLayout();
     verticalLayout_3 = new QVBoxLayout();
@@ -178,7 +178,7 @@ void onglet::setupUi(QWidget *parent){
     verticalLayout_2->addLayout(horizontalLayout_3);
 }
 
-void onglet::retranslateUi(QWidget *parent)
+void onglet::retranslateUi()
 {
     enterButton->setShortcut(QString("Return"));
     opDivideButton->setShortcut(QString("/"));
@@ -229,7 +229,7 @@ void onglet::retranslateUi(QWidget *parent)
     labelStatus->setText(QString());
 }
 
-void onglet::setupSignals(QWidget *parent){
+void onglet::setupSignals(){
     // Pavé numérique
     connect(num0Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(num1Button, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
