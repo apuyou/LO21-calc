@@ -96,9 +96,22 @@ public:
 
 
 protected:
+    /**
+     * \fn setupUi()
+     * \brief Fonction : Créé l'ensemble des widgets de l'onglet
+     */
     void setupUi();
+    /**
+     * \fn retranslateUi()
+     * \brief Fonction : Ajoute les raccourcis claviers aux boutons
+     */
     void retranslateUi();
+    /**
+     * \fn setupSignals
+     * \brief Fonction : Met en place les signaux entre boutons et slots
+     */
     void setupSignals();
+
     Calculateur c;  /* Calculateur utilisé pour effectuer les opérations de l'utilisateur */
     QList<QList<QListWidgetItem*> > undoListItems;
     QList<Calculateur> undoCalculateur;
@@ -109,7 +122,16 @@ protected:
      * \brief Fonction : Retire la dernière ligne de lineWidget qui n'est pas une expression
      */
     void retireDerniereLigneAffichee();
+    /**
+     * \fn evaluate(QString newElement)
+     * \brief Fonction : Évalue l'expression passée en paramètre et place son résultat en haut de la pile
+     */
     void evaluate(QString newElement);
+    /**
+     * \fn updateFromCalculateur()
+     * \param newElement : chaîne à évaluer
+     * \brief Fonction : Remplit la liste d'affichage à partir de la pile du calculateur
+     */
     void updateFromCalculateur();
     /**
      * \fn float PGCD(float n, float d);
