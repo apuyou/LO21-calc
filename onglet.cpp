@@ -644,7 +644,6 @@ void onglet::redo(){
 }
 
 void onglet::updateFromCalculateur(bool force){
-    cout << "update"<<modeIndex<<endl;
     QStack<QString> p = c.getPile();
     if(p.size() > 0 && (listWidget->count() == 0 || force)){
         listWidget->clear();
