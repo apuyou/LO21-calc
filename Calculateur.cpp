@@ -669,7 +669,7 @@ void Calculateur::factorielle()
         throw Erreur("Fonction non utilisable en mode complexe");
     //Gestion des erreurs : On vérifie que le mode de constante soit compatible avec la fonction
     if(typeConstante_m != Entier)
-        return;
+        throw Erreur("La fonction factorielle ne fonctionne que sur les entiers");
     //Gestion des erreurs : Si la pile est vide, on ne fait rien
     if(pile_m.isEmpty())
         return;
