@@ -5,7 +5,7 @@
  * \version 0.1
  * \date 15 Mai 2012
  *
- * La classe Calculateur est la classe principale de la claculatrice. Elle gère la pile et effectue les opérations
+ * La classe Calculateur est la classe principale de la claculatrice. Elle gÃ¨re la pile et effectue les opÃ©rations
  *
  */
 
@@ -25,38 +25,38 @@
 
 /**
  * \enum Mode
- * \brief Mode permet de différencier les différents types de donées utilisés
+ * \brief Mode permet de diffÃ©rencier les diffÃ©rents types de donÃ©es utilisÃ©s
  */
 enum Mode {Entier, Reel, Fraction};
 
 /**
  * \class Calculateur
- * \brief Classe principale de la calculatrice permettant de gérer une pile et effectuer les opérations
+ * \brief Classe principale de la calculatrice permettant de gÃ©rer une pile et effectuer les opÃ©rations
  */
 class Calculateur{
 private:
-    QStack<float> pile_m; /*!< Pile de réelles permettant de stocker les résultats des opérations */
-    QStack<float> pileImaginaire_m; /*!< Pile de réelles permettant de stocker la partie imaginaires des nombres complexes */
-    bool radiant_m; /*!< Booléen égal à TRUE si le mode radian et activé et FALSE si le mode degré est activé */
-    bool complexe_m; /*!< Booléen égal à TRUE si le mode complexe et activé et FALSE si le mode complexe est désactivé */
-    Mode typeConstante_m; /*!< Variable de type Mode (énumération) permettant de définir le mode de constante */
+    QStack<float> pile_m; /*!< Pile de rÃ©elles permettant de stocker les rÃ©sultats des opÃ©rations */
+    QStack<float> pileImaginaire_m; /*!< Pile de rÃ©elles permettant de stocker la partie imaginaires des nombres complexes */
+    bool radiant_m; /*!< BoolÃ©en Ã©gal Ã  TRUE si le mode radian et activÃ© et FALSE si le mode degrÃ© est activÃ© */
+    bool complexe_m; /*!< BoolÃ©en Ã©gal Ã  TRUE si le mode complexe et activÃ© et FALSE si le mode complexe est dÃ©sactivÃ© */
+    Mode typeConstante_m; /*!< Variable de type Mode (Ã©numÃ©ration) permettant de dÃ©finir le mode de constante */
     static unsigned int compteur; /*!< Variable statique contant le nombre d'instances de la classe Calculateur */
-    unsigned int onglet; /*!< Variable contenant le numéro de l'onglet courant */
+    unsigned int onglet; /*!< Variable contenant le numÃ©ro de l'onglet courant */
 public:
     /**
      * \fn Calculateur()
-     * \brief Fonction : Créer une nouvelle instance de l'objet Calculateur
+     * \brief Fonction : CrÃ©er une nouvelle instance de l'objet Calculateur
      */
     Calculateur();
     /**
      * \fn Calculateur(const Calculateur& c)
-     * \brief Fonction : Créer une nouvelle instance de l'objet Calculateur en copiant une instance existante
+     * \brief Fonction : CrÃ©er une nouvelle instance de l'objet Calculateur en copiant une instance existante
      */
     Calculateur(const Calculateur& c);
     /**
      * \fn Calculateur& operator=(const Calculateur& c)
      * \brief Fonction : Copie l'instance c du calculateur
-     * \return Retourne une instance du Calculateur identique à c
+     * \return Retourne une instance du Calculateur identique Ã  c
      */
     Calculateur& operator=(const Calculateur& c);
     /**
@@ -71,7 +71,7 @@ public:
     void chargerPiles();
     /**
      * \fn modeDegre()
-     * \brief Fonction : Bascule le calculateur en mode degré
+     * \brief Fonction : Bascule le calculateur en mode degrÃ©
      */
     void modeDegre(){radiant_m = false;}
     /**
@@ -86,7 +86,7 @@ public:
     void modeEntier();
     /**
      * \fn modeReel()
-     * \brief Fonction : Bascule le calculateur en mode réel
+     * \brief Fonction : Bascule le calculateur en mode rÃ©el
      */
     void modeReel(){typeConstante_m = Reel;}
     /**
@@ -106,51 +106,51 @@ public:
     void modeHorsComplexe();
     /**
      * \fn void insererElement(const std::string& s)
-     * \brief Fonction : décomposer un objet string en une suite d'opérandes et d'opérateurs, insère les opérandes dans la pile de stockage, puis lance les opérations correspondant aux opérateurs
+     * \brief Fonction : dÃ©composer un objet string en une suite d'opÃ©randes et d'opÃ©rateurs, insÃ¨re les opÃ©randes dans la pile de stockage, puis lance les opÃ©rations correspondant aux opÃ©rateurs
      *
-     * \param s chaîne de caractère contenant l'expression à évaluer et à insérer dans la pile
+     * \param s chaÃ®ne de caractÃ¨re contenant l'expression Ã  Ã©valuer et Ã  insÃ©rer dans la pile
      */
     void insererElement(const std::string& s);
     /**
      * \fn void addition()
-     * \brief Fonction : Dépile deux éléments de la pile et effectue une addition avant d'insérer le résultat dans la pile
+     * \brief Fonction : DÃ©pile deux Ã©lÃ©ments de la pile et effectue une addition avant d'insÃ©rer le rÃ©sultat dans la pile
      */
     void addition();
     /**
      * \fn void soustraction()
-     * \brief Fonction : Dépile deux éléments de la pile et effectue une soustraction avant d'insérer le résultat dans la pile
+     * \brief Fonction : DÃ©pile deux Ã©lÃ©ments de la pile et effectue une soustraction avant d'insÃ©rer le rÃ©sultat dans la pile
      */
     void soustraction();
     /**
      * \fn void multiplication()
-     * \brief Fonction : Dépile deux éléments de la pile et effectue une multiplication avant d'insérer le résultat dans la pile
+     * \brief Fonction : DÃ©pile deux Ã©lÃ©ments de la pile et effectue une multiplication avant d'insÃ©rer le rÃ©sultat dans la pile
      */
     void multiplication();
     /**
      * \fn void division()
-     * \brief Fonction : Dépile deux éléments de la pile et effectue une division avant d'insérer le résultat dans la pile
+     * \brief Fonction : DÃ©pile deux Ã©lÃ©ments de la pile et effectue une division avant d'insÃ©rer le rÃ©sultat dans la pile
      */
     void division();
     /**
      * \fn void swap(int x, int y)
-     * \brief Fonction : Inverse le xème élément de la pile avec le yème
+     * \brief Fonction : Inverse le xÃ¨me Ã©lÃ©ment de la pile avec le yÃ¨me
      *
-     * \param x : Entier contenant l'indice du premier élément
-     * \param y : Entier contenant l'indice du deuxième élément
+     * \param x : Entier contenant l'indice du premier Ã©lÃ©ment
+     * \param y : Entier contenant l'indice du deuxiÃ¨me Ã©lÃ©ment
      */
     void swap(int x, int y);
     /**
      * \fn void sum(int x)
-     * \brief Fonction : Somme les x premiers éléments de la pile
+     * \brief Fonction : Somme les x premiers Ã©lÃ©ments de la pile
      *
-     * \param x : Entier désignant le nombre d'éléments à sommer
+     * \param x : Entier dÃ©signant le nombre d'Ã©lÃ©ments Ã  sommer
      */
     void sum(int x);
     /**
      * \fn void mean(int x)
-     * \brief Fonction : Effectue la moyenne des x premiers éléments de la pile
+     * \brief Fonction : Effectue la moyenne des x premiers Ã©lÃ©ments de la pile
      *
-     * \param x : Entier désignant le nombre d'éléments compris dans la moyenne
+     * \param x : Entier dÃ©signant le nombre d'Ã©lÃ©ments compris dans la moyenne
      */
     void mean(int x);
     /**
@@ -160,98 +160,98 @@ public:
     void clear();
     /**
      * \fn void dup()
-     * \brief Fonction : Duplique le premier élément de la pile
+     * \brief Fonction : Duplique le premier Ã©lÃ©ment de la pile
      */
     void dup();
     /**
      * \fn void drop()
-     * \brief Fonction : Supprime le premier élément de la pile
+     * \brief Fonction : Supprime le premier Ã©lÃ©ment de la pile
      */
     void drop();
     /**
      * \fn void pow()
-     * \brief Fonction : Dépile deux éléments a et b et effectue a^b
+     * \brief Fonction : DÃ©pile deux Ã©lÃ©ments a et b et effectue a^b
      */
     void pow();
     /**
      * \fn void mod()
-     * \brief Fonction : Dépile deux éléments a et b et effectue a%b
+     * \brief Fonction : DÃ©pile deux Ã©lÃ©ments a et b et effectue a%b
      */
     void mod();
     /**
      * \fn void sign()
-     * \brief Fonction : Inverse le signe du premier élément de la pile
+     * \brief Fonction : Inverse le signe du premier Ã©lÃ©ment de la pile
      */
     void sign();
     /**
      * \fn void sin()
-     * \brief Fonction : Effectue le sinus du premier élément de la pile
+     * \brief Fonction : Effectue le sinus du premier Ã©lÃ©ment de la pile
      */
     void sin();
     /**
      * \fn void cos()
-     * \brief Fonction : Effectue le cosinus du premier élément de la pile
+     * \brief Fonction : Effectue le cosinus du premier Ã©lÃ©ment de la pile
      */
     void cos();
     /**
      * \fn void tan()
-     * \brief Fonction : Effectue la tangente du premier élément de la pile
+     * \brief Fonction : Effectue la tangente du premier Ã©lÃ©ment de la pile
      */
     void tan();
     /**
      * \fn void sinh()
-     * \brief Fonction : Effectue le sinus hyperbolique du premier élément de la pile
+     * \brief Fonction : Effectue le sinus hyperbolique du premier Ã©lÃ©ment de la pile
      */
     void sinh();
     /**
      * \fn void cosh()
-     * \brief Fonction : Effectue le cosinus hyperbolique du premier élément de la pile
+     * \brief Fonction : Effectue le cosinus hyperbolique du premier Ã©lÃ©ment de la pile
      */
     void cosh();
     /**
      * \fn void tanh()
-     * \brief Fonction : Effectue la tangente hyperbolique du premier élément de la pile
+     * \brief Fonction : Effectue la tangente hyperbolique du premier Ã©lÃ©ment de la pile
      */
     void tanh();
     /**
      * \fn void ln()
-     * \brief Fonction : Effectue le logarithme népérien du premier élément de la pile
+     * \brief Fonction : Effectue le logarithme nÃ©pÃ©rien du premier Ã©lÃ©ment de la pile
      */
     void ln();
     /**
      * \fn void log()
-     * \brief Fonction : Effectue le logarithme décimal du premier élément de la pile
+     * \brief Fonction : Effectue le logarithme dÃ©cimal du premier Ã©lÃ©ment de la pile
      */
     void log();
     /**
      * \fn void inv()
-     * \brief Fonction : Calcul l'inverse du premier élément de la pile
+     * \brief Fonction : Calcul l'inverse du premier Ã©lÃ©ment de la pile
      */
     void inv();
     /**
      * \fn void sqrt()
-     * \brief Fonction : Calcul la racine carrée du premier élément de la pile
+     * \brief Fonction : Calcul la racine carrÃ©e du premier Ã©lÃ©ment de la pile
      */
     void sqrt();
     /**
      * \fn void sqr()
-     * \brief Fonction : Calcul le carrée du premier élément de la pile
+     * \brief Fonction : Calcul le carrÃ©e du premier Ã©lÃ©ment de la pile
      */
     void sqr();
     /**
      * \fn void cube()
-     * \brief Fonction : Calcul le cube du premier élément de la pile
+     * \brief Fonction : Calcul le cube du premier Ã©lÃ©ment de la pile
      */
     void cube();
     /**
      * \fn void factorielle()
-     * \brief Fonction : Calcul le factorielle du premier élément de la pile
+     * \brief Fonction : Calcul le factorielle du premier Ã©lÃ©ment de la pile
      */
     void factorielle();
 
     /**
      * \fn QStack<QString> getPile()
-     * \brief Fonction : récupère le contenu de la pile dans une pile de QString
+     * \brief Fonction : rÃ©cupÃ¨re le contenu de la pile dans une pile de QString
      *
      */
     QStack<QString> getPile();
@@ -266,7 +266,7 @@ public:
     /**
      * \fn QString getTetePile()
      * \brief Fonction : renvoie la tete de la pile
-     * \return Retourne l'élément tout en haut de la pile
+     * \return Retourne l'Ã©lÃ©ment tout en haut de la pile
      */
     QString getTetePile();
 };
