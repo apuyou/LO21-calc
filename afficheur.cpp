@@ -39,6 +39,8 @@ Afficheur::Afficheur(QWidget *parent) :
     connect(ui->actionPas_de_clavier, SIGNAL(triggered()), this, SLOT(clavierOff()));
     connect(ui->actionClavier_simple, SIGNAL(triggered()), this, SLOT(clavierSimple()));
     connect(ui->actionClavier_etendu, SIGNAL(triggered()), this, SLOT(clavierEtendu()));
+    connect(ui->actionAnnuler, SIGNAL(triggered()), this, SLOT(undo()));
+    connect(ui->actionRetablir, SIGNAL(triggered()), this, SLOT(redo()));
 }
 
 Afficheur::~Afficheur()
