@@ -124,6 +124,7 @@ protected:
     QList<QList<QListWidgetItem*> > undoListItems;
     QList<Calculateur> undoCalculateur;
     int undoIndex;
+    int modeIndex;
 
     /**
      * \fn retireDerniereLigneAffichee()
@@ -137,10 +138,10 @@ protected:
     void evaluate(QString newElement);
     /**
      * \fn updateFromCalculateur()
-     * \param newElement : chaîne à évaluer
+     * \param force : forcer l'effacement de la pile d'affichage, même si elle n'est pas vide
      * \brief Fonction : Remplit la liste d'affichage à partir de la pile du calculateur
      */
-    void updateFromCalculateur();
+    void updateFromCalculateur(bool force = false);
     /**
      * \fn float PGCD(float n, float d);
      * \brief Fonction : Calcul le PGCD de deux réels

@@ -1,4 +1,5 @@
 #include "onglet.h"
+#include <cmath>
 
 onglet::onglet(QWidget *):undoIndex(0)
 {
@@ -213,6 +214,7 @@ void onglet::retranslateUi()
     comboType->setToolTip(QApplication::translate("Afficheur", "Type de constantes", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
     comboType->setCurrentIndex(1);
+    modeIndex = 1;
 
     comboAngles->clear();
     comboAngles->insertItems(0, QStringList()
@@ -411,6 +413,8 @@ void onglet::modeChanged(int index){
     default:
         break;
     }
+    modeIndex = index;
+    updateFromCalculateur(true);
 }
 
 Calculateur onglet::getCalculateur(){
@@ -639,11 +643,26 @@ void onglet::redo(){
     setCalculateur(c);
 }
 
-void onglet::updateFromCalculateur(){
+void onglet::updateFromCalculateur(bool force){
+    cout << "update"<<modeIndex<<endl;
     QStack<QString> p = c.getPile();
-    if(p.size() > 0 && listWidget->count() == 0){
+    if(p.size() > 0 && (listWidget->count() == 0 || force)){
+        listWidget->clear();
         do {
-            listWidget->insertItem(0, p.pop());
+            float num = p.pop().toFloat();
+            switch(modeIndex){
+                case 0:
+                    listWidget->insertItem(0, QString("%1").arg(floor(num)));
+                break;
+                case 1:
+                    listWidget->insertItem(0, QString("%1").arg(num));
+                break;
+                case 2:
+                    float numerateur, denominateur;
+                    numerateur = getFraction(num, &denominateur);
+                    listWidget->insertItem(0, QString("%1/%2").arg(numerateur).arg(denominateur));
+                break;
+            }
         } while(p.size() != 0);
     }
 }
