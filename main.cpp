@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    Calculateur c;
+   /* Calculateur c;
     try{
         c.insererElement("2 3 15 / ");
         c.modeComplexe();
@@ -24,15 +24,15 @@ int main(int argc, char *argv[])
     }catch(Erreur e){
         std::cout<<e.what()<<std::endl;
     }
-    /* Test de la convertion réel => fraction
+    // Test de la convertion réel => fraction
     float d;
     float n = getFraction(0.25, &d);
     std::cout<<n<<"/"<<d<<std::endl;
-    */
+
     Calculateur c2(c);
     Calculateur c3;
     c3 = c2;
-    c3.afficherPile();
+    c3.afficherPile();*/
 
 #if GUI
     Afficheur w;
