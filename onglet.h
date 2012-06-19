@@ -91,7 +91,15 @@ public:
     QLabel *labelStatus;
     QWidget *clavierSimple;
     QWidget *clavierEtendu;
+    /**
+     * \fn chargerPiles()
+     * \brief Appelle la méthode chargerPiles du calculateur et met à jour l'affichage
+     */
     void chargerPiles();
+    /**
+     * \fn sauvegarderPiles()
+     * \brief Appelle la méthode sauvegarderPiles du calculateur
+     */
     void sauverPiles();
 
 
@@ -153,25 +161,102 @@ protected:
     float getFraction(float a, float* denominateur);
 
 private slots:
+    /**
+     * \slot genericButtonPressed()
+     * \brief Slot générique pour l'ensemble des boutons qui ne font qu'ajouter une opération dans le champ de saisie
+     */
     void genericButtonPressed();
+    /**
+     * \slot enterPressed()
+     * \brief Gère l'appui sur la touche Entrée (évaluation du champ de saisie ou bien DUP s'il est vide)
+     */
     void enterPressed();
+    /**
+     * \slot spacePressed()
+     * \brief Ajoute un espace dans le champ de saisie
+     */
     void spacePressed();
+    /**
+     * \slot deletePressed()
+     * \brief Gère l'appui sur la touche Effacer (effacer un caractère du champ de saisie ou bien DROP s'il est vide)
+     */
     void deletePressed();
+    /**
+     * \slot complexeChanged(bool newState)
+     * \param newState : état après le changement
+     * \brief Active ou désactive le mode complexe
+     */
     void complexeChanged(bool newState);
+    /**
+     * \slot anglesChanged(int index)
+     * \param index : nouvel index du comboBox
+     * \brief Modifie le système angulaire
+     */
     void anglesChanged(int index);
+    /**
+     * \slot modeChanged(int index)
+     * \param index : nouvel index du comboBox
+     * \brief Modifie le mode d'affichage des nombres stockés dans la calculatrice
+     */
     void modeChanged(int index);
+    /**
+     * \slot evalPressed()
+     * \brief Gestion de l'appui sur la touche EVAL
+     */
     void evalPressed();
+    /**
+     * \slot clearPressed()
+     * \brief Gestion de l'appui sur la touche CLEAR
+     */
     void clearPressed();
+    /**
+     * \slot dropPressed()
+     * \brief Gestion de l'appui sur la touche DROP
+     */
     void dropPressed();
+    /**
+     * \slot dupPressed()
+     * \brief Gestion de l'appui sur la touche DUP
+     */
     void dupPressed();
+    /**
+     * \slot popupButtonPressed()
+     * \brief Slot générique pour les opérations nécessitant un paramètre supplémentaire à l'exécution (SUM, MEAN)
+     */
     void popupButtonPressed();
+    /**
+     * \slot swapPressed()
+     * \brief Gestion de l'appui sur SWAP, qui nécessite deux paramètres
+     */
     void swapPressed();
+    /**
+     * \slot saveState()
+     * \brief Enregistre l'état de la calculatrice pour pouvoir faire des undo/redo
+     */
     void saveState();
 
 public:
+    /**
+     * \fn Calculateur getCalculateur()
+     * \brief Renvoie une copie de l'objet Calculateur utilisé par l'onglet
+     * \return Calculateur
+     */
     Calculateur getCalculateur();
+    /**
+     * \fn setCalculateur(Calculateur nouveau)
+     * \brief Remplace le calculateur de l'onglet par nouveau
+     * \param Calculateur nouveau : Calculateur à remplacer
+     */
     void setCalculateur(Calculateur nouveau);
+    /**
+     * \fn undo()
+     * \brief Annule la dernière opération
+     */
     void undo();
+    /**
+     * \fn redo()
+     * \brief Rétablit la dernière opération
+     */
     void redo();
 
 };
