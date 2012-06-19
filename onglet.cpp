@@ -267,6 +267,13 @@ void onglet::setupSignals(){
     connect(powButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
     connect(meanButton, SIGNAL(clicked()), this, SLOT(popupButtonPressed()));
     connect(swapButton, SIGNAL(clicked()), this, SLOT(swapPressed()));
+    connect(lnButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(logButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(sqrButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(sqrtButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(invButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(cubeButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
+    connect(factButton, SIGNAL(clicked()), this, SLOT(genericButtonPressed()));
 
     // Réglages
     connect(checkboxComplexes, SIGNAL(toggled(bool)), this, SLOT(complexeChanged(bool)));
