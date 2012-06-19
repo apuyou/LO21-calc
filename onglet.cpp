@@ -576,6 +576,7 @@ float onglet::getFraction(float a, float* denominateur)
     //On renvoie le numérateur et le dénominateur
     return res;
 }
+
 void onglet::saveState(){
     undoIndex++;
 
@@ -629,4 +630,27 @@ void onglet::redo(){
     // Remplacement du calculateur
     Calculateur c = undoCalculateur.at(undoIndex);
     setCalculateur(c);
+}
+
+void onglet::updateFromCalculateur(){
+    QStack<QString> p = c.getPile();
+    if(p.size() > 0 && listWidget->count() == 0){
+        do {
+            listWidget->insertItem(0, p.pop());
+        } while(p.size() != 0);
+    }
+}
+
+onglet::~onglet(){
+
+}
+
+void onglet::sauverPiles()
+{
+    c.sauvegarderPiles();
+}
+
+void onglet::chargerPiles(){
+    c.chargerPiles();
+    updateFromCalculateur();
 }

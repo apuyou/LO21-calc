@@ -88,8 +88,11 @@ void Calculateur::sauvegarderPiles()
         throw Erreur("Ouverture du fichier " + nomFichier + " impoossible");
     //On stocke l'ensemble de la pile des réels dans le fichier
     QStack<float>::iterator it;
-    for(it = pile_m.begin(); it < pile_m.end() ; ++it)
-        fichier<<*it<<std::endl;
+    for(it = pile_m.begin(); it < pile_m.end() ; ++it){
+        fichier<<*it;
+        if(it < pile_m.end()-1)
+            fichier<<std::endl;
+    }
     fichier.close();
     if(complexe_m){
         //On crée une chaine de caractère contenant le chemin du fichier
@@ -103,8 +106,11 @@ void Calculateur::sauvegarderPiles()
             throw Erreur("Ouverture du fichier " + nomFichier + " impoossible");
         //On stocke l'ensemble de la pile des réels dans le fichier
         QStack<float>::iterator it;
-        for(it = pileImaginaire_m.begin(); it < pileImaginaire_m.end() ; ++it)
-            fichier<<*it<<std::endl;
+        for(it = pileImaginaire_m.begin(); it < pileImaginaire_m.end() ; ++it){
+            fichier<<*it;
+            if(it < pileImaginaire_m.end()-1)
+                fichier<<std::endl;
+        }
         fichier.close();
     }
 }
@@ -697,6 +703,27 @@ void Calculateur::afficherPile(std::ostream &f)
     for(it = pile_m.begin(); it < pile_m.end() ; ++it)
         f<<*it<<std::endl;
     }
+}
+
+QStack<QString> Calculateur::getPile()
+{
+    QStack<QString> ret;
+    if(complexe_m){
+        //On parcourt les piles simulatanément avec deux itérateurs pour ne pas dépiler
+        QStack<float>::iterator reIt;
+        QStack<float>::iterator imIt;
+        imIt =pileImaginaire_m.begin();
+        for(reIt = pile_m.begin(); reIt < pile_m.end() ; ++reIt){
+            ret.push(QString("%1$%2").arg(*reIt).arg(*imIt));
+            imIt++;
+        }
+    }else{
+    //On parcourt la pile avec un itérateur pour ne pas dépiler
+    QStack<float>::iterator it;
+    for(it = pile_m.begin(); it < pile_m.end() ; ++it)
+        ret.push(QString("%1").arg(*it));
+    }
+   return ret;
 }
 
 QString Calculateur::getTetePile(){

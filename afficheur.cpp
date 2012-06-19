@@ -28,8 +28,10 @@ Afficheur::Afficheur(QWidget *parent) :
     clavierGroup->addAction(ui->actionClavier_simple);
     clavierGroup->addAction(ui->actionClavier_etendu);
 
-    ui->tabWidget->addTab(new onglet(this), QString("Onglet 1"));
+    onglet *o = new onglet(this);
+    ui->tabWidget->addTab(o, QString("Onglet 1"));
     ui->tabWidget->setCurrentIndex(0);
+    o->chargerPiles();
 
     // Menus
     connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -45,6 +47,8 @@ Afficheur::Afficheur(QWidget *parent) :
 
 Afficheur::~Afficheur()
 {
+    onglet *o = (onglet*) ui->tabWidget->currentWidget();
+    o->sauverPiles();
     delete ui;
 }
 

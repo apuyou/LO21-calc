@@ -248,6 +248,13 @@ public:
      * \brief Fonction : Calcul le factorielle du premier élément de la pile
      */
     void factorielle();
+
+    /**
+     * \fn QStack<QString> getPile()
+     * \brief Fonction : récupère le contenu de la pile dans une pile de QString
+     *
+     */
+    QStack<QString> getPile();
     /**
      * \fn void afficherPile(std::ostream& f=std::cout)
      * \brief Fonction : affiche le contenu de la pile dans un flux

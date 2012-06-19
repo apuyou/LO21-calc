@@ -33,6 +33,7 @@ class onglet: public QWidget
 
 public:
     onglet(QWidget *);
+    ~onglet();
     QWidget *tab;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -90,6 +91,9 @@ public:
     QLabel *labelStatus;
     QWidget *clavierSimple;
     QWidget *clavierEtendu;
+    void chargerPiles();
+    void sauverPiles();
+
 
 protected:
     void setupUi();
