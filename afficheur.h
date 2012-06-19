@@ -22,7 +22,7 @@ namespace Ui {
 }
 
 /**
- * \class Calculateur
+ * \class Afficheur
  * \brief Classe de la fenêtre principale, qui contient les onglets
  */
 class Afficheur: public QMainWindow
@@ -44,42 +44,34 @@ public:
 
 private slots:
     /**
-     * \slot NouvelOnglet()
      * \brief Créé un nouvel onglet
      */
     void nouvelOnglet();
     /**
-     * \slot NouvelOngletCopie()
      * \brief Créé un nouvel onglet en recopiant l'onglet actuel
      */
     void nouvelOngletCopie();
     /**
-     * \slot fermeOnglet()
      * \brief Ferme l'onglet actuel
      */
     void fermeOnglet();
     /**
-     * \slot clavierOff()
      * \brief Masque le clavier
      */
     void clavierOff();
     /**
-     * \slot clavierSimple()
-     * \brief Affiche seulement les opérateurs les plus simples
+     * \brief Affiche seulement les opérateurs les plus simples
      */
     void clavierSimple();
     /**
-     * \slot clavierEtendu()
      * \brief Affiche tous les opérateurs
      */
     void clavierEtendu();
     /**
-     * \slot undo()
-     * \brief Appelle la méthode undo de l'onglet actif
+     * \brief Appelle la méthode undo de l'onglet actif
      */
     void undo();
     /**
-     * \slot redo()
      * \brief Appelle la méthode redo de l'onglet actif
      */
     void redo();
