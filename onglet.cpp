@@ -198,7 +198,7 @@ void onglet::retranslateUi()
     num0Button->setShortcut(QString("0"));
     quoteButton->setShortcut(QString("'"));
     spaceButton->setShortcut(QString("Space"));
-    decimalButton->setShortcut(QString(","));
+    decimalButton->setShortcut(QString("."));
     dollarButton->setShortcut(QString("$"));
     clearButton->setShortcut(QString("CTRL+C"));
 
@@ -286,7 +286,7 @@ void onglet::genericButtonPressed(){
         nextChar = newText.at(0);
 
     // Ne pas rajouter d'espace si on est au tout début, après un espace, ou si on est en train de taper un nombre
-    if(previousText.endsWith(' ') || previousText.length() == 0
+    if(previousText.endsWith(' ') || previousText.length() == 0 || nextChar == '.' || prevChar == '.'
             || (prevChar.isNumber() && nextChar.isNumber()) || (previousText.endsWith('$') || newText.startsWith('$')))
         inputLine->setText(previousText + newText);
     // Rajouter un espace sinon
